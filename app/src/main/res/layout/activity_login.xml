@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorbtnPress">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="账号绑定"
+            android:textColor="#ffffff"
+            android:textSize="35sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="50dp"
+            android:text="账号:"
+            android:textColor="@color/colorbtnPress"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ev_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_username"
+            android:background="@null"
+            android:hint="请输入你的账号"
+            android:paddingLeft="50dp"
+            android:paddingTop="50dp"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_username"
+            android:paddingLeft="20dp"
+            android:paddingTop="30dp"
+            android:text="密码:"
+            android:textColor="@color/colorbtnPress"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/ev_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ev_username"
+            android:layout_toRightOf="@id/tv_username"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="50dp"
+            android:paddingTop="30dp"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

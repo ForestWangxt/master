@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#c1c1c1"
+    android:orientation="horizontal">
+
+
+    <RadioGroup
+        android:id="@+id/home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="智码罗盘"
+            android:textColor="@drawable/bg_textcolor" />
+
+        <RadioButton
+            android:id="@+id/rb_redian"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="数据查询"
+            android:textColor="@drawable/bg_textcolor" />
+
+        <RadioButton
+            android:id="@+id/rb_shiting"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="门店查询"
+            android:textColor="@drawable/bg_textcolor" />
+
+
+        <RadioButton
+            android:id="@+id/rb_shezhi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:gravity="center"
+            android:text="联络伺动"
+            android:textColor="@drawable/bg_textcolor" />
+    </RadioGroup>
+
+</LinearLayout>
