@@ -66,10 +66,13 @@
 
         <activity
             android:name="com.kpi.activity.ContactsAnalystaActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.kpi.activity.StormAboutActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity android:name="com.kpi.activity.BaseActivity">
+
+        </activity>
     </application>
 
 </manifest>
