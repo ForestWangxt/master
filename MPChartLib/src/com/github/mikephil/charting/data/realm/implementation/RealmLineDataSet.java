@@ -3,7 +3,6 @@ package com.github.mikephil.charting.data.realm.implementation;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.drawable.Drawable;
 
 import com.github.mikephil.charting.data.realm.base.RealmLineRadarDataSet;
 import com.github.mikephil.charting.formatter.DefaultFillFormatter;

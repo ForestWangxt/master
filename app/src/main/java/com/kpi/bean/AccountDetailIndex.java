@@ -40,100 +40,11 @@ public class AccountDetailIndex {
     }
 
     public static class DataEntity {
-        /**
-         * age : null
-         * allowActivityDM : null
-         * allowActivityEDM : null
-         * allowActivityMobile : null
-         * allowActivitySMS : null
-         * allowActivityWechat : null
-         * allowAfternoonContact : null
-         * allowEveningContact : null
-         * allowMorningContact : null
-         * allowRightDM : null
-         * allowRightEDM : null
-         * allowRightMobile : null
-         * allowRightSMS : null
-         * allowRightWechat : null
-         * birthD : null
-         * birthM : null
-         * birthY : null
-         * birthday : null
-         * cardNumber : null
-         * cardType : null
-         * career : null
-         * child : null
-         * code : null
-         * country : null
-         * createdCounter : null
-         * createdSales : null
-         * createdTime : null
-         * createdUser : null
-         * customerId : CU160100001606
-         * database : null
-         * education : null
-         * email : null
-         * emailStatus : null
-         * enrollTime : null
-         * fax : null
-         * firstName : null
-         * firstScanTime : null
-         * gender : null
-         * homeTel : null
-         * joinedCounter : null
-         * joinedSales : null
-         * lastName : 吴强
-         * lastUpdateTime : null
-         * lastUpdateUser : null
-         * married : null
-         * masterCustomerId : null
-         * membershipType : null
-         * mgmId : null
-         * mgmTime : null
-         * mgmType : null
-         * mobile : 15901629558
-         * mobileArea : 上海
-         * mobileStatus : null
-         * officeTel : null
-         * posCode : null
-         * rawId : null
-         * remark : null
-         * remark1 : 臻妤实业
-         * remark2 : null
-         * remark3 : null
-         * remark4 : null
-         * remark5 : null
-         * serviceCounter : null
-         * sourceType : null
-         * status : null
-         * tel : null
-         * wechatId : null
-         * wechatJoinedTime : null
-         */
+
 
         private CustomerSoapEntity customerSoap;
         private String imageurl;
         private String msg;
-        /**
-         * area : null
-         * database : null
-         * ddate : null
-         * ddatefrom : null
-         * ddatefromMom : null
-         * ddateto : null
-         * ddatetoMom : null
-         * lastUpdateTime : null
-         * limit : null
-         * order : null
-         * productId : CB
-         * productName : 统一冰红茶[柠檬]
-         * scanAddCount : null
-         * scanAddCountMom : null
-         * scanCount : 71135
-         * scanCountMom : -2.1%
-         * scanCustomerCount : 37120
-         * scanCustomerCountMom : 0.8%
-         */
 
         private List<DataListTotilEntity> dataListTotil;
 

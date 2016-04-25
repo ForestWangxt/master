@@ -425,7 +425,7 @@ public class IndexTrendActivity extends AppCompatActivity implements RadioGroup.
         start_time.setVisibility(View.VISIBLE);
         stop_time.setVisibility(View.VISIBLE);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-        alphaAnimation.setDuration(500);
+        alphaAnimation.setDuration(300);
         start_time.setAnimation(alphaAnimation);
         stop_time.setAnimation(alphaAnimation);
     }

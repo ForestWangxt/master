@@ -24,6 +24,7 @@ import java.util.List;
  * 
  * @author Philipp Jahoda
  */
+@SuppressWarnings("StringConcatenationInsideStringBufferAppend")
 public class FileUtils {
 
     private static final String LOG = "MPChart-FileUtils";
@@ -194,6 +195,7 @@ public class FileUtils {
      * @param ds
      * @param path
      */
+    @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
     public static void saveToSdCard(List<Entry> entries, String path) {
 
         File sdcard = Environment.getExternalStorageDirectory();
@@ -216,6 +218,7 @@ public class FileUtils {
 
             for (Entry e : entries) {
 
+                //noinspection StringConcatenationInsideStringBufferAppend
                 buf.append(e.getVal() + "#" + e.getXIndex());
                 buf.newLine();
             }
