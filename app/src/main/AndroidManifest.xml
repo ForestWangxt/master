@@ -28,17 +28,22 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc" />
+            android:value="2mdnepZxhoOwhWBmDMGIzl6lkLhEmAGO"/>
+<!--            android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc" />-->
 
         <activity
-            android:name="com.kpi.activity.MainActivity"
+            android:name="com.kpi.activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.kpi.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.kpi.activity.KpiIndexActivity"
             android:screenOrientation="portrait" />
@@ -63,16 +68,14 @@
         <activity
             android:name="com.kpi.activity.MyAccountActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.kpi.activity.ContactsAnalystaActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.kpi.activity.StormAboutActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.kpi.activity.BaseActivity">
-
-        </activity>
+        <activity android:name="com.kpi.activity.BaseActivity"></activity>
+       <!-- <activity android:name="com.kpi.activity.LoginActivity"></activity>-->
     </application>
 
 </manifest>

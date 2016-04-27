@@ -19,6 +19,7 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.kpi.utils.DialogUtils;
 import com.kpi.utils.NetUtils;
@@ -29,7 +30,7 @@ import com.storm.kpi.R;
  * 门店查询
  */
 public class SelectCounterFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
-    private MapView mMapView;
+    private TextureMapView mMapView;
     private LocationClient mLocClient;
     private BaiduMap mBaiduMap;
     public MyLocationListener myListener;
@@ -49,7 +50,7 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_counter, container, false);
         //获取地图控件引用
-        mMapView = (MapView) view.findViewById(R.id.bmapView);
+        mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
         RadioGroup rg = (RadioGroup) view.findViewById(R.id.rg);
         ImageView img_location = (ImageView) view.findViewById(R.id.img_location);
         img_location.setOnClickListener(this);
@@ -60,11 +61,15 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     @Override
     public void onDestroy() {
         // 退出时销毁定位
-        mLocClient.stop();
+        if (mLocClient != null){
+
+            mLocClient.stop();
+
         // 关闭定位图层
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
         mMapView = null;
+        }
         super.onDestroy();
     }
 
