@@ -61,19 +61,17 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     @Override
     public void onDestroy() {
         // 退出时销毁定位
-        if (mLocClient != null){
-
+        if (mLocClient != null) {
             mLocClient.stop();
-
-        // 关闭定位图层
-        mBaiduMap.setMyLocationEnabled(false);
-        mMapView.onDestroy();
-        mMapView = null;
+            // 关闭定位图层
+            mBaiduMap.setMyLocationEnabled(false);
+            mMapView.onDestroy();
+            mMapView = null;
+            super.onDestroy();
+        }else{
+            super.onDestroy();
         }
-        super.onDestroy();
     }
-
-
     @Override
     public void onPause() {
         super.onPause();

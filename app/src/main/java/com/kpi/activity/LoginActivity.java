@@ -4,13 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.storm.kpi.R;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
+
+/**
+ * 用户登录
+ */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         initView();
     }
 
-    private void initToolBar() {
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
