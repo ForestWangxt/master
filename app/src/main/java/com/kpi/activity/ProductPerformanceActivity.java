@@ -47,13 +47,10 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
     private RequestQueue queue;
     private ProductIndex product;
     private LinearLayout mLinearLayout;
-
-
     private TextView tv_product_startTime;
     private TextView tv_product_stopTime;
     private TextView tv_product_startTimeMom;
     private TextView tv_product_stopTimeMom;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +243,6 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
             mLinearLayout.setVisibility(View.GONE);
         }
     }
-
 
 
     @Override
