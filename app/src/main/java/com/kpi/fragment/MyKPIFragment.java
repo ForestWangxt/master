@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import android.widget.RelativeLayout;
 
 import com.kpi.activity.BeginHelp;
 import com.kpi.activity.InfoActivity;
 import com.kpi.activity.InforMessActivity;
+
+
 import com.storm.kpi.R;
 
 /**
@@ -22,6 +25,7 @@ public class MyKPIFragment extends Fragment implements View.OnClickListener {
 
     private ImageView info_img;
     private RelativeLayout begin,informess;
+
 
     public MyKPIFragment() {
     }

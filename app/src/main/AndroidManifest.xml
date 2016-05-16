@@ -29,12 +29,17 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc"/>
+
+            android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc" />
+
 
         <activity
             android:name="com.kpi.activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
         <activity
             android:name="com.kpi.activity.KpiIndexActivity"
             android:screenOrientation="portrait"/>
@@ -58,7 +63,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name="com.kpi.activity.MyAccountActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name="com.kpi.activity.ContactsAnalystaActivity"
             android:screenOrientation="portrait"/>
