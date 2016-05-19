@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import com.storm.kpi.R;
 
+/**
+ * 找回密码
+ */
 public class ForgotPassWordActivity extends BaseActivity {
 
     @Override
@@ -15,7 +18,7 @@ public class ForgotPassWordActivity extends BaseActivity {
 
     protected void initToolBar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("忘记密码");
+            getSupportActionBar().setTitle("找回密码");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }

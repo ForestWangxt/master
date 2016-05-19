@@ -94,15 +94,15 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity
-            android:name="com.kpi.activity.ForgotPassWordActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+
 
         <activity
             android:name="com.kpi.activity.PassWordActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.kpi.activity.ForgotPassWordActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>
