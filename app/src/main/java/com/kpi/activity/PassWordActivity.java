@@ -1,0 +1,80 @@
+package com.kpi.activity;
+
+import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.kpi.utils.ToastUtils;
+import com.storm.kpi.R;
+
+/**
+ * 填写密码
+ */
+public class PassWordActivity extends BaseActivity implements View.OnClickListener {
+    private EditText ed_password1;
+    private EditText ed_password2;
+    private TextInputLayout textInputLayout1;
+    private TextInputLayout textInputLayout2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pass_word);
+        initTooBar();
+        initView();
+    }
+
+
+    private void initTooBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.password_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setTitle("");
+                getSupportActionBar().setHomeAsUpIndicator(R.mipmap.left);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
+    }
+
+    private void initView() {
+        textInputLayout1 = (TextInputLayout) findViewById(R.id.password_TextInputLayout1);
+        textInputLayout2 = (TextInputLayout) findViewById(R.id.password_TextInputLayout2);
+        ed_password1 = (EditText) findViewById(R.id.ed_reg_password1);
+        ed_password2 = (EditText) findViewById(R.id.ed_reg_password2);
+        Button btn_reg_finish = (Button) findViewById(R.id.btn_register_finish);
+        btn_reg_finish.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (checkPassword()) {
+            ToastUtils.showMessage(this, "注册成功!");
+        }
+    }
+
+    private boolean checkPassword() {
+        if (ed_password1.getText().toString().equals("") || ed_password2.getText().toString().equals("")) {
+            ToastUtils.showMessage(this, "请输入密码!");
+            return false;
+        }
+        if (textInputLayout1.getEditText().getText().length() < 8) {
+            textInputLayout1.getEditText().setError("密码不能少于8位");
+            return false;
+        }
+        if (textInputLayout1.getEditText().getText().length() > 16) {
+            textInputLayout1.getEditText().setError("密码最多16位");
+            return false;
+        }
+        if (!ed_password1.getText().toString().equals(textInputLayout2.getEditText().getText().toString())) {
+            textInputLayout2.getEditText().setError("两次密码不一致");
+            return false;
+        }
+        return true;
+    }
+}

@@ -47,15 +47,27 @@
             android:textColor="@drawable/bg_textcolor" />
 
 
+        <!--<RadioButton-->
+            <!--android:id="@+id/rb_shezhi"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:button="@null"-->
+            <!--android:drawableTop="@mipmap/ic_launcher"-->
+            <!--android:gravity="center"-->
+            <!--android:text="联络伺动"-->
+            <!--android:textColor="@drawable/bg_textcolor" />-->
+
         <RadioButton
-            android:id="@+id/rb_shezhi"
+
+            android:id="@+id/rb_MyKPI"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:button="@null"
             android:drawableTop="@mipmap/ic_launcher"
             android:gravity="center"
-            android:text="联络伺动"
+            android:text="我的智码"
             android:textColor="@drawable/bg_textcolor" />
     </RadioGroup>
 

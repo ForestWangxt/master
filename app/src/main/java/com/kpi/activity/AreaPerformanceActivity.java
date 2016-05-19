@@ -2,8 +2,6 @@ package com.kpi.activity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -41,7 +39,7 @@ import java.util.List;
 /**
  * 区域表现
  */
-public class AreaPerformanceActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class AreaPerformanceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     private ListView mListView;
     private RequestQueue queue;
@@ -74,7 +72,7 @@ public class AreaPerformanceActivity extends AppCompatActivity implements RadioG
         }
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("区域表现");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -162,13 +160,6 @@ public class AreaPerformanceActivity extends AppCompatActivity implements RadioG
         DialogUtils.showProgressDialog(this, "数据加载中...");
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
-    }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {

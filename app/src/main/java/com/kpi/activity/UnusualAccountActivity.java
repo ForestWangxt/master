@@ -3,8 +3,6 @@ package com.kpi.activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,7 +36,7 @@ import java.util.List;
 /**
  * 异常账户
  */
-public class UnusualAccountActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class UnusualAccountActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private TextView tv_account_date;
     private ListView mListView;
     private RequestQueue queue;
@@ -60,7 +58,7 @@ public class UnusualAccountActivity extends AppCompatActivity implements View.On
     }
 
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("日扫码异常");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,14 +85,6 @@ public class UnusualAccountActivity extends AppCompatActivity implements View.On
         pb_loading.setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-
-        return false;
-    }
 
     @Override
     public void onClick(View v) {

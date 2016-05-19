@@ -3,6 +3,6 @@
     <color name="colorPrimary">#9119fa</color>
     <color name="colorPrimaryDark">#9119fa</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorbtnPress">#6fa5fc</color>
-    <color name="colorbtnNormal">#5e9afc</color>
+    <color name="colorbtnPress">#9119fa</color>
+    <color name="colorbtnNormal">#a545fa</color>
 </resources>

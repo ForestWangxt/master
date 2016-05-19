@@ -1,14 +1,12 @@
 package com.kpi.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.kpi.image.SmartImageView;
 import com.kpi.utils.DialogUtils;
 import com.storm.kpi.R;
 
-public class ContactsAnalystaActivity extends AppCompatActivity {
+public class ContactsAnalystaActivity extends BaseActivity {
 
     private SmartImageView smartImageView;
 
@@ -28,19 +26,11 @@ public class ContactsAnalystaActivity extends AppCompatActivity {
     }
 
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("联络分析师");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
     }
 
 }

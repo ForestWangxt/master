@@ -1,8 +1,6 @@
 package com.kpi.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -33,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //账户详细
-public class AccountDetailActivity extends AppCompatActivity {
+public class AccountDetailActivity extends BaseActivity {
     private RequestQueue queue;
     private AccountDetailIndex accountDetailIndex;
     private TextView tv_accountId;
@@ -59,7 +57,7 @@ public class AccountDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("客户信息");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -160,7 +158,7 @@ public class AccountDetailActivity extends AppCompatActivity {
     private void updateAccountScan() {
         String url = "http://192.168.0.19:4444";  //请求的IP;
         String img_url = accountDetailIndex.getData().getImageurl();  //图片地址
-        Glide.with(this).load(url + new StringBuffer(img_url)).into(img_account_detail);
+        Glide.with(getApplicationContext()).load(url + new StringBuffer(img_url)).into(img_account_detail);
         //soapEntity--->客户信息
         AccountDetailIndex.DataEntity.CustomerSoapEntity soapEntity = accountDetailIndex.getData().getCustomerSoap();
         tv_accountId.setText(soapEntity.getCustomerId());
@@ -168,7 +166,6 @@ public class AccountDetailActivity extends AppCompatActivity {
         tv_phone.setText(soapEntity.getMobile());
         tv_shop.setText(String.valueOf(soapEntity.getServiceCounter()));
         tv_address.setText(soapEntity.getMobileArea());
-
     }
 
     /**
@@ -213,12 +210,4 @@ public class AccountDetailActivity extends AppCompatActivity {
         ListViewUtils.setListViewHeight(list_record);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-
-        return false;
-    }
 }

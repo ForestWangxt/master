@@ -4,20 +4,19 @@ import android.os.Bundle;
 
 import com.storm.kpi.R;
 
-public class MyAccountActivity extends BaseActivity {
+public class ForgotPassWordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_account);
+        setContentView(R.layout.activity_forgot_pass_word);
         initToolBar();
     }
 
     protected void initToolBar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("我的账户");
+            getSupportActionBar().setTitle("忘记密码");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
 }

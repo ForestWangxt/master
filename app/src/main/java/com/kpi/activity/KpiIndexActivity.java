@@ -2,8 +2,6 @@ package com.kpi.activity;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -23,7 +21,7 @@ import org.json.JSONObject;
 /**
  * 重要KPI指标
  */
-public class KpiIndexActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView tv_ScanCountToday;    //当日扫码件数
@@ -76,15 +74,19 @@ public class KpiIndexActivity extends AppCompatActivity implements SwipeRefreshL
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
+
+
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(this);
         initView();
+
+
         if (NetUtils.isNetworkConnected(this)) {
             RequestKpiIndex();
         }
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("KPI指数");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -186,11 +188,4 @@ public class KpiIndexActivity extends AppCompatActivity implements SwipeRefreshL
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
-    }
 }

@@ -49,7 +49,6 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-
             case R.id.layout_contacts_analysts:
                 intent = new Intent(getActivity(), ContactsAnalystaActivity.class);
                 startActivity(intent);
@@ -67,6 +66,5 @@ public class ContactsFragment extends Fragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
-
     }
 }

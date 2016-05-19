@@ -2,8 +2,6 @@ package com.kpi.activity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -44,7 +42,7 @@ import java.util.List;
 /**
  * 产品表现
  */
-public class ProductPerformanceActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class ProductPerformanceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private ListView mListView;
     private RequestQueue queue;
     private ProductIndex product;
@@ -147,7 +145,7 @@ public class ProductPerformanceActivity extends AppCompatActivity implements Rad
         }
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("产品表现");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -192,7 +190,7 @@ public class ProductPerformanceActivity extends AppCompatActivity implements Rad
             String url = "http://192.168.0.19:4444";
             String ImgUrl = dataEntity.getImageurl();
             ImageView img_productIndex = (ImageView) findViewById(R.id.img_productIndex);
-            Glide.with(this).load(url + new StringBuffer(ImgUrl)).into(img_productIndex);
+            Glide.with(getApplicationContext()).load(url + new StringBuffer(ImgUrl)).into(img_productIndex);
             List<ProductIndex.DataEntity.DataListTotilEntity> lists = dataEntity.getDataListTotil();
             for (int i = 0, count = lists.size(); i < count; i++) {
                 p = new Product();
@@ -250,13 +248,6 @@ public class ProductPerformanceActivity extends AppCompatActivity implements Rad
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
-    }
 
     @Override
     public void onClick(View v) {

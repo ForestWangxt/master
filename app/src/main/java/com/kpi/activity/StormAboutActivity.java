@@ -1,8 +1,6 @@
 package com.kpi.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,7 +12,7 @@ import com.bumptech.glide.RequestManager;
 import com.kpi.utils.DialogUtils;
 import com.storm.kpi.R;
 
-public class StormAboutActivity extends AppCompatActivity {
+public class StormAboutActivity extends BaseActivity {
     private String[] ul = {"http://192.168.0.19:4444/image/storminfo/p2.PNG",
             "http://192.168.0.19:4444/image/storminfo/p3.PNG",
             "http://192.168.0.19:4444/image/storminfo/p4.PNG",
@@ -114,18 +112,11 @@ public class StormAboutActivity extends AppCompatActivity {
         }
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("伺动简介");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
-    }
 }

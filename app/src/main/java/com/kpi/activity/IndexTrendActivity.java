@@ -4,8 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -45,7 +43,7 @@ import java.util.List;
 /**
  * KPI指标趋势
  */
-public class IndexTrendActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     private RadioButton rb1;
     private RadioButton rb2;
     private RadioButton rb3;
@@ -79,7 +77,7 @@ public class IndexTrendActivity extends AppCompatActivity implements RadioGroup.
     }
 
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("指标趋势图");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -434,13 +432,5 @@ public class IndexTrendActivity extends AppCompatActivity implements RadioGroup.
     //设置为当前时间
     private void setCurrentTime(TextView v) {
         v.setText(DateUtil.CurrentDay());
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
     }
 }

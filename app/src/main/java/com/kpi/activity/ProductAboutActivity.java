@@ -1,8 +1,6 @@
 package com.kpi.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
@@ -12,7 +10,7 @@ import com.storm.kpi.R;
 /**
  * 产品简介
  */
-public class ProductAboutActivity extends AppCompatActivity {
+public class ProductAboutActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,18 +22,10 @@ public class ProductAboutActivity extends AppCompatActivity {
         manager.load("http://192.168.0.19:4444/image/productInfo.png").into(img_product_about);
     }
 
-    private void initToolBar() {
+    protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("产品简介");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-        }
-        return false;
     }
 }

@@ -84,29 +84,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent;
+        Intent intent=null;
         switch (v.getId()) {
             case R.id.layout_kpiIndex:
                 intent = new Intent(getActivity(), KpiIndexActivity.class);
-                startActivity(intent);
                 break;
             case R.id.layout_IndexTrend:
                 intent = new Intent(getActivity(), IndexTrendActivity.class);
-                startActivity(intent);
                 break;
             case R.id.layout_area:
                 intent = new Intent(getActivity(), AreaPerformanceActivity.class);
-                startActivity(intent);
                 break;
             case R.id.layout_product:
                 intent = new Intent(getActivity(), ProductPerformanceActivity.class);
-                startActivity(intent);
                 break;
             case R.id.layout_unusual:
                 intent = new Intent(getActivity(), UnusualAccountActivity.class);
-                startActivity(intent);
                 break;
         }
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+
     }
 
     private void RequestChartValue() {
