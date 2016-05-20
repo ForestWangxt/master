@@ -39,7 +39,6 @@ public class InforMessActivity extends BaseActivity {
         mInforMess3.setTitles("人工智能成主打 2016谷歌I/O开发者大会内容汇总");
         mInforMess3.setAbst("新浪科技讯，5月19日凌晨消息，谷歌公司(Google)今日在美国旧金山召开Google I/O 2016年度开发者大会。发布新的智能助手，智能家居产品等。我们难得在著名理工男谷歌的发布会上看到一次文艺开场，Google I/O这场发布会居然从一段5分钟live house音乐表演开始。然后陆续发布产品。");
         list.add(mInforMess3);
-        System.out.println(list.size());
 
         InforMessListView inforlist = new InforMessListView(this,list);
         mListView.setAdapter(inforlist);

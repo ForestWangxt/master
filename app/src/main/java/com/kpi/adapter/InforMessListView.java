@@ -40,8 +40,6 @@ public class InforMessListView extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        System.out.println("=======aaaaa==========");
-        System.out.println(mArrayList.size());
         ViewHolder viewHolder = null;
         if(convertView == null){
             viewHolder = new ViewHolder();
@@ -55,9 +53,6 @@ public class InforMessListView extends BaseAdapter {
         }
         viewHolder.title.setText(mArrayList.get(position).getTitle());
         viewHolder.content.setText(mArrayList.get(position).getAbst());
-        System.out.println("======"+position);
-        System.out.println(mArrayList.get(position).getTitle());
-        System.out.println(mArrayList.get(position).getAbst());
         return convertView;
     }
     static class ViewHolder {
