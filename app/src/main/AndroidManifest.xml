@@ -47,45 +47,49 @@
         <activity android:name="com.kpi.activity.ContactsAnalystaActivity" />
         <activity android:name="com.kpi.activity.StormAboutActivity" />
 
-    <activity
-        android:name="com.kpi.activity.InfoActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity
-        android:name="com.kpi.activity.UpdateInfoActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.InfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.UpdateInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-    <activity
-        android:name="com.kpi.activity.LoginActivity"
-        android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name="com.kpi.activity.RegisterActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kpi.activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-    <activity android:name="com.kpi.activity.SetActivity">
+        <activity android:name="com.kpi.activity.SetActivity">
 
-    </activity>
-    <activity
-        android:name="com.kpi.activity.BeginHelpActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
+        </activity>
+        <activity
+            android:name="com.kpi.activity.BeginHelpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-    <activity
-        android:name="com.kpi.activity.PassWordActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.PassWordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-    <activity
-        android:name="com.kpi.activity.ForgotPassWordActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name="com.kpi.activity.AboutStormActivity" />
-    <activity
-        android:name="com.kpi.activity.NowPassWordActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
-    <activity android:name="com.kpi.activity.FeedBackActivity" />
-    <activity
-        android:name="com.kpi.activity.InforMessActivity"
-        android:theme="@style/AppTheme.NoActionBar" />
-</application></manifest>
+        <activity
+            android:name="com.kpi.activity.ForgotPassWordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.kpi.activity.AboutStormActivity" />
+        <activity
+            android:name="com.kpi.activity.NowPassWordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.kpi.activity.FeedBackActivity" />
+        <activity
+            android:name="com.kpi.activity.InforMessActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.UpdatePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+</manifest>
