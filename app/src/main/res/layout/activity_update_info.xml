@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e9e8e8"
+    android:background="#ededed"
     tools:context="com.kpi.activity.UpdateInfoActivity">
 
 
@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary">
-
 
         <TextView
             android:id="@+id/tv_info_save"
@@ -23,7 +22,6 @@
             android:text="保存"
             android:textColor="#fff"
             android:textSize="16sp" />
-
 
     </android.support.v7.widget.Toolbar>
 

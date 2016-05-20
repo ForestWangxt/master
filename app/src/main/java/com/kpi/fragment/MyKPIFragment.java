@@ -7,24 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
 import android.widget.RelativeLayout;
 
-import com.kpi.activity.BeginHelp;
+import com.kpi.activity.AboutStormActivity;
+import com.kpi.activity.BeginHelpActivity;
 import com.kpi.activity.InfoActivity;
 import com.kpi.activity.InforMessActivity;
-
-
+import com.kpi.activity.SetActivity;
 import com.storm.kpi.R;
 
 /**
  * 我的智码
  */
 public class MyKPIFragment extends Fragment implements View.OnClickListener {
-
-    private ImageView info_img;
-    private RelativeLayout begin,informess;
 
 
     public MyKPIFragment() {
@@ -40,35 +35,40 @@ public class MyKPIFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View view) {
-        begin = (RelativeLayout) view.findViewById(R.id.beginhelp);
-        begin.setOnClickListener(this);
-        informess = (RelativeLayout) view.findViewById(R.id.infor_message);
-        informess.setOnClickListener(this);
-        info_img = (ImageView) view.findViewById(R.id.img_info);
-        info_img.setOnClickListener(this);
+        RelativeLayout Layout_info = (RelativeLayout) view.findViewById(R.id.Layout_info);
+        RelativeLayout Layout_about_Storm = (RelativeLayout) view.findViewById(R.id.Layout_about_Storm);
+        RelativeLayout Layout_Set = (RelativeLayout) view.findViewById(R.id.Layout_Set);
+        RelativeLayout beginhelp = (RelativeLayout) view.findViewById(R.id.beginhelp);
+        RelativeLayout infor_message = (RelativeLayout) view.findViewById(R.id.infor_message);
+        Layout_info.setOnClickListener(this);
+        Layout_about_Storm.setOnClickListener(this);
+        Layout_Set.setOnClickListener(this);
+        beginhelp.setOnClickListener(this);
+        infor_message.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent;
+        Intent intent = null;
         switch (v.getId()) {
-            case R.id.img_info:
-                intent=new Intent(getActivity(), InfoActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
-
+            case R.id.Layout_info:
+                intent = new Intent(getActivity(), InfoActivity.class);
+                break;
+            case R.id.Layout_about_Storm:
+                intent = new Intent(getActivity(), AboutStormActivity.class);
                 break;
             case R.id.beginhelp:
-                intent = new Intent(getActivity(), BeginHelp.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+                intent = new Intent(getActivity(), BeginHelpActivity.class);
+                break;
+            case R.id.Layout_Set:
+                intent = new Intent(getActivity(), SetActivity.class);
                 break;
             case R.id.infor_message:
                 intent = new Intent(getActivity(), InforMessActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 break;
         }
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 }

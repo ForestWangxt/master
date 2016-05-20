@@ -2,15 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d9d8d8"
+    android:background="#ededed"
     android:orientation="vertical"
     tools:context="com.kpi.fragment.MyKPIFragment">
 
     <RelativeLayout
+
+        android:id="@+id/Layout_info"
         android:layout_width="match_parent"
         android:layout_height="88dp"
-        android:background="#ffffff">
-
+        android:background="@drawable/bg_mykpi_item">
 
         <com.kpi.view.XCRoundImageView
             android:id="@+id/myKpi_photo"
@@ -51,7 +52,6 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_info"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -123,6 +123,7 @@
         android:background="#c7c7c7" />
 
     <RelativeLayout
+        android:id="@+id/Layout_about_Storm"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"
@@ -148,6 +149,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/Layout_Set"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"

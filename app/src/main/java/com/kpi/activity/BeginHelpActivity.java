@@ -6,7 +6,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.storm.kpi.R;
 
-public class BeginHelp extends BaseActivity {
+/**
+ * 新手帮助
+ */
+public class BeginHelpActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -73,9 +73,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
         if (NetUtils.isNetworkConnected(this)) {
             RequestChartValue();
         }
-
     }
-
 
     protected void initToolBar() {
         if (getSupportActionBar() != null) {
@@ -195,7 +193,6 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
         LineDataSet scanCountSet = new LineDataSet(scanCount, "扫码件数");
         scanCountSet.setColor(Color.RED);
         scanCountSet.setHighLightColor(Color.RED);
-
 
         LineDataSet customerCountSet = new LineDataSet(customerCount, "扫码人数");
         customerCountSet.setColor(Color.BLUE);

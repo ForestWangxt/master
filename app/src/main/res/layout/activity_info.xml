@@ -31,7 +31,7 @@
         android:id="@+id/update_logo"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         android:id="@+id/update_username"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
         android:id="@+id/update_sex"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
         android:id="@+id/update_company"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
         android:id="@+id/update_job"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
 
@@ -265,7 +265,7 @@
         android:id="@+id/update_note"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/bg_update_layout">
+        android:background="@drawable/bg_mykpi_item">
 
         <TextView
             android:layout_width="wrap_content"

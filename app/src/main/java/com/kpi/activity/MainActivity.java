@@ -32,8 +32,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_bar_main);
+       MyApp.getInstance().addActivity(this);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-
         initFragment();
         initViews();
         initToolBar();
@@ -172,6 +172,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     public class DepthPageTransformer implements ViewPager.PageTransformer {
         private static final float MIN_SCALE = 0.75f;
+
         public void transformPage(View view, float position) {
             int pageWidth = view.getWidth();
             if (position < 0) {
@@ -193,11 +194,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
 
     private long timeMillis;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - timeMillis) > 2000) {
-                ToastUtils.showMessage(this,"再按一次退出动量智码");
+                ToastUtils.showMessage(this, "再按一次退出动量智码");
                 timeMillis = System.currentTimeMillis();
             } else {
                 finish();

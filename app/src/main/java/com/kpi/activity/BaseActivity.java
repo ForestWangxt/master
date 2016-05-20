@@ -1,5 +1,6 @@
 package com.kpi.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -7,7 +8,9 @@ import android.view.MenuItem;
 
 import com.storm.kpi.R;
 
-
+/**
+ * 基类Activity
+ */
 public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +18,6 @@ public class BaseActivity extends AppCompatActivity {
         initToolBar();
     }
 
-    //初始化头部的ToolBar
     protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -42,5 +44,11 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    //设置竖屏
+    @Override
+    public void setRequestedOrientation(int requestedOrientation) {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }

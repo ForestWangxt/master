@@ -2,8 +2,8 @@ package com.kpi.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,9 +13,9 @@ import com.storm.kpi.R;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
-/**
- * 用户登录
- */
+    /**
+     * 用户登录
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +65,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
         }
+    }
+
+    //返回键
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
+            this.finish();
+            return true;
+        }
+        return false;
     }
 }
