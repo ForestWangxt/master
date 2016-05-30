@@ -13,7 +13,7 @@
         android:layout_height="88dp"
         android:background="@drawable/bg_mykpi_item">
 
-        <com.kpi.view.XCRoundImageView
+        <com.kpi.view.CircleImageView
             android:id="@+id/myKpi_photo"
             android:layout_width="72dp"
             android:layout_height="72dp"

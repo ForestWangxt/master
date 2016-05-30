@@ -17,7 +17,6 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
@@ -34,7 +33,7 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     private LocationClient mLocClient;
     private BaiduMap mBaiduMap;
     public MyLocationListener myListener;
-    private boolean isFirst;
+    private boolean isFirst = false;
 
     public SelectCounterFragment() {
     }
@@ -52,7 +51,7 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
         //获取地图控件引用
         mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
         RadioGroup rg = (RadioGroup) view.findViewById(R.id.rg);
-        ImageView img_location = (ImageView) view.findViewById(R.id.img_location);
+        ImageView img_location = (ImageView) getActivity().findViewById(R.id.img_location);
         img_location.setOnClickListener(this);
         rg.setOnCheckedChangeListener(this);
         return view;
@@ -68,14 +67,14 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
             mMapView.onDestroy();
             mMapView = null;
             super.onDestroy();
-        }else{
+        } else {
             super.onDestroy();
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
-        isFirst = false;
     }
 
     private void showProgressDialog() {
@@ -85,14 +84,13 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser && NetUtils.isNetworkConnected(getActivity())) {
-            if (!isFirst) {
-                getMyLocation();
-            }
+            getMyLocation();
         }
     }
 
     //获取实时位置
     private void getMyLocation() {
+        isFirst = true;
         showProgressDialog();
         myListener = new MyLocationListener();
         mBaiduMap = mMapView.getMap();
@@ -109,7 +107,6 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
         mLocClient.setLocOption(option);
         //普通地图
         mLocClient.start();
-        isFirst = true;
     }
 
 
@@ -122,6 +119,7 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.rb_map_normal:
+                //普通地图
                 mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
                 break;
             case R.id.rb_map_sate:
@@ -134,7 +132,7 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            if (bdLocation != null) {
+            if (bdLocation != null && isFirst) {
                 ToastUtils.showMessage(getActivity(), "你当前的区域:" + bdLocation.getCity() + bdLocation.getDistrict());
                 MyLocationData locData = new MyLocationData.Builder()
                         .accuracy(bdLocation.getRadius())
@@ -147,11 +145,11 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-            } else {
-                ToastUtils.showMessage(getActivity(), "定位失败！");
+                isFirst = false;
+            } else if (bdLocation == null) {
+                ToastUtils.showMessage(getActivity(), "定位失败,默认为北京！");
             }
             DialogUtils.dissmissProgressDialog();
         }
     }
-
 }

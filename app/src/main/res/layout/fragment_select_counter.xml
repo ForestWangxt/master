@@ -35,11 +35,5 @@
             android:textColor="#ff0000" />
     </RadioGroup>
 
-    <ImageView
-        android:id="@+id/img_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:padding="16dp"
-        android:src="@mipmap/location" />
+
 </RelativeLayout>

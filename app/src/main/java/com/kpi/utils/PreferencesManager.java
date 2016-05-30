@@ -20,7 +20,7 @@ public class PreferencesManager {
     }
     /**
      * 获取默认的sp文件default_cfg.xml，默认模式为Content。MODE_PRIVATE
-     * @param content
+     * @param context
      * @return
      */
     public static PreferencesManager getDefaultSharedPreference(Context context){

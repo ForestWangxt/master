@@ -9,9 +9,10 @@ import android.widget.Button;
 import com.storm.kpi.R;
 
 /**
- * 更新密码----》现有密码
+ * 更新密码----》检查现有密码
  */
-public class NowPassWordActivity extends BaseActivity implements View.OnClickListener {
+public class
+NowPassWordActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

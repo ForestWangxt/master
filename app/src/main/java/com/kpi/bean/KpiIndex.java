@@ -3,15 +3,9 @@ package com.kpi.bean;
 
 public class KpiIndex {
 
-    /**
-     * dataList : {"ScanCountMonthName":"月(十万)","CustomerCountWeekMom":"+28%","ScanCountWeekMom":"+30%","AddCustomerCount":142407,"ScanCountMonthMom":"+283%","ScanCountYearMom":"-","CustomerCountToday":3481,"ScanCountToday":7182,"CustomerCountYearName":"年(十万)","ScanCountMonth":5.79,"CustomerCountMonthMom":"+329%","ScanCountWeekName":"7日(十万)","CustomerCountWeekName":"7日","ScanQuantityCount":923044,"ScanCountWeek":2.18,"ScanCountYearName":"年(十万)","CustomerCountMonth":98863,"CustomerCountWeek":58081,"CustomerCountYearMom":"-","ScanCountYear":9.23,"CustomerCountYear":1.2,"CustomerCountTodayMom":"-78.8%","ScanCustomerCount":119884,"ScanCountTodayMom":"-81.23%","CustomerCountMonthName":"当月"}
-     */
 
     private DataEntity data;
-    /**
-     * data : {"dataList":{"ScanCountMonthName":"月(十万)","CustomerCountWeekMom":"+28%","ScanCountWeekMom":"+30%","AddCustomerCount":142407,"ScanCountMonthMom":"+283%","ScanCountYearMom":"-","CustomerCountToday":3481,"ScanCountToday":7182,"CustomerCountYearName":"年(十万)","ScanCountMonth":5.79,"CustomerCountMonthMom":"+329%","ScanCountWeekName":"7日(十万)","CustomerCountWeekName":"7日","ScanQuantityCount":923044,"ScanCountWeek":2.18,"ScanCountYearName":"年(十万)","CustomerCountMonth":98863,"CustomerCountWeek":58081,"CustomerCountYearMom":"-","ScanCountYear":9.23,"CustomerCountYear":1.2,"CustomerCountTodayMom":"-78.8%","ScanCustomerCount":119884,"ScanCountTodayMom":"-81.23%","CustomerCountMonthName":"当月"}}
-     * success : true
-     */
+
 
     private boolean success;
 

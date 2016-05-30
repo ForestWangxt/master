@@ -5,14 +5,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.kpi.adapter.viewPagerAdapter;
-import com.kpi.fragment.ContactsFragment;
 import com.kpi.fragment.HomeFragment;
 import com.kpi.fragment.MyKPIFragment;
-import com.kpi.fragment.OtherFragment;
+import com.kpi.fragment.MessageFragment;
 import com.kpi.fragment.SelectCounterFragment;
 import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
@@ -32,7 +32,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_bar_main);
-       MyApp.getInstance().addActivity(this);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         initFragment();
         initViews();
@@ -72,11 +71,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     //初始化Fragment
     private void initFragment() {
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new HomeFragment());
-        adapter.AddFragment(new OtherFragment());
-        adapter.AddFragment(new SelectCounterFragment());
-        adapter.AddFragment(new ContactsFragment());
-        adapter.AddFragment(new MyKPIFragment());
+        adapter.AddFragment(new HomeFragment());  //主页面
+        adapter.AddFragment(new MessageFragment());   //消息
+        adapter.AddFragment(new SelectCounterFragment());   //门店查询
+        //adapter.AddFragment(new ContactsFragment());
+        adapter.AddFragment(new MyKPIFragment());    //我的智码
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new onPageChange());
         viewPager.setOffscreenPageLimit(3);
@@ -110,18 +109,22 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     //RadioGroup监听事件
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        ImageView img_location = (ImageView) findViewById(R.id.img_location);
         switch (checkedId) {
             case R.id.rb_home:
                 viewPager.setCurrentItem(0);
                 radioButton1.setChecked(true);
+                img_location.setVisibility(View.GONE);
                 break;
             case R.id.rb_redian:
                 viewPager.setCurrentItem(1);
                 radioButton2.setChecked(true);
+                img_location.setVisibility(View.GONE);
                 break;
             case R.id.rb_shiting:
                 viewPager.setCurrentItem(2);
                 radioButton3.setChecked(true);
+                img_location.setVisibility(View.VISIBLE);
                 break;
             //       case R.id.rb_shezhi:
             //       viewPager.setCurrentItem(3);
@@ -130,6 +133,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_MyKPI:
                 viewPager.setCurrentItem(4);
                 radioButton5.setChecked(true);
+                img_location.setVisibility(View.GONE);
                 break;
 
         }
@@ -140,6 +144,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
         }
 
         @Override

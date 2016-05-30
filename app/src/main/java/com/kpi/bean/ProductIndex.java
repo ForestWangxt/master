@@ -2,24 +2,11 @@ package com.kpi.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/3/25.
- */
+
 public class ProductIndex {
 
 
-    /**
-     * dataListTotil : [{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"CB","productName":"统一冰红茶[柠檬]","scanAddCount":null,"scanAddCountMom":null,"scanCount":4675,"scanCountMom":"-48.3%","scanCustomerCount":2637,"scanCustomerCountMom":"-51.0%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"CL","productName":"统一绿茶[茉莉]","scanAddCount":null,"scanAddCountMom":null,"scanCount":9524,"scanCountMom":"-47.8%","scanCustomerCount":5285,"scanCustomerCountMom":"-49.4%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"GB","productName":"饮养四季冰糖雪梨[梨汁饮料]","scanAddCount":null,"scanAddCountMom":null,"scanCount":541,"scanCountMom":"-50.7%","scanCustomerCount":373,"scanCustomerCountMom":"-48.3%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"GX","productName":"统一鲜橙多[橙汁饮料]","scanAddCount":null,"scanAddCountMom":null,"scanCount":341,"scanCountMom":"-47.4%","scanCustomerCount":195,"scanCustomerCountMom":"-52.3%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"ZA","productName":"统一阿萨姆[原味奶茶]","scanAddCount":null,"scanAddCountMom":null,"scanCount":2791,"scanCountMom":"-51.4%","scanCustomerCount":1894,"scanCustomerCountMom":"-51.6%"}]
-     * code : 0
-     * imageurl : /image/output/openId/20160331/KPI002_20160331135009.gif
-     * msg : 成功
-     */
-
     private DataEntity data;
-    /**
-     * data : {"dataListTotil":[{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"CB","productName":"统一冰红茶[柠檬]","scanAddCount":null,"scanAddCountMom":null,"scanCount":4675,"scanCountMom":"-48.3%","scanCustomerCount":2637,"scanCustomerCountMom":"-51.0%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"CL","productName":"统一绿茶[茉莉]","scanAddCount":null,"scanAddCountMom":null,"scanCount":9524,"scanCountMom":"-47.8%","scanCustomerCount":5285,"scanCustomerCountMom":"-49.4%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"GB","productName":"饮养四季冰糖雪梨[梨汁饮料]","scanAddCount":null,"scanAddCountMom":null,"scanCount":541,"scanCountMom":"-50.7%","scanCustomerCount":373,"scanCustomerCountMom":"-48.3%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"GX","productName":"统一鲜橙多[橙汁饮料]","scanAddCount":null,"scanAddCountMom":null,"scanCount":341,"scanCountMom":"-47.4%","scanCustomerCount":195,"scanCustomerCountMom":"-52.3%"},{"area":null,"database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"lastUpdateTime":null,"limit":null,"order":null,"productId":"ZA","productName":"统一阿萨姆[原味奶茶]","scanAddCount":null,"scanAddCountMom":null,"scanCount":2791,"scanCountMom":"-51.4%","scanCustomerCount":1894,"scanCustomerCountMom":"-51.6%"}],"code":0,"imageurl":"/image/output/openId/20160331/KPI002_20160331135009.gif","msg":"成功"}
-     * success : true
-     */
 
     private boolean success;
 
@@ -43,26 +30,7 @@ public class ProductIndex {
         private int code;
         private String imageurl;
         private String msg;
-        /**
-         * area : null
-         * database : null
-         * ddate : null
-         * ddatefrom : null
-         * ddatefromMom : null
-         * ddateto : null
-         * ddatetoMom : null
-         * lastUpdateTime : null
-         * limit : null
-         * order : null
-         * productId : CB
-         * productName : 统一冰红茶[柠檬]
-         * scanAddCount : null
-         * scanAddCountMom : null
-         * scanCount : 4675
-         * scanCountMom : -48.3%
-         * scanCustomerCount : 2637
-         * scanCustomerCountMom : -51.0%
-         */
+
 
         private List<DataListTotilEntity> dataListTotil;
 

@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--访问相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name="com.kpi.activity.MyApp"
@@ -29,6 +31,10 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
 
         <activity
             android:name="com.kpi.activity.MainActivity"
@@ -36,26 +42,50 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name="com.kpi.activity.KpiIndexActivity" />
-        <activity android:name="com.kpi.activity.IndexTrendActivity" />
-        <activity android:name="com.kpi.activity.AreaPerformanceActivity" />
-        <activity android:name="com.kpi.activity.ProductPerformanceActivity" />
-        <activity android:name="com.kpi.activity.UnusualAccountActivity" />
-        <activity android:name="com.kpi.activity.AccountDetailActivity" />
-        <activity android:name="com.kpi.activity.ProductAboutActivity" />
-        <activity android:name="com.kpi.activity.MyAccountActivity" />
-        <activity android:name="com.kpi.activity.ContactsAnalystaActivity" />
-        <activity android:name="com.kpi.activity.StormAboutActivity" />
+        <activity
+            android:name="com.kpi.activity.KpiIndexActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.IndexTrendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.AreaPerformanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.ProductPerformanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.UnusualAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.AccountDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.ProductAboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.MyAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.ContactsAnalystaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.kpi.activity.StormAboutActivity"
+            android:screenOrientation="portrait" />
 
         <activity
+
             android:name="com.kpi.activity.InfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.kpi.activity.UpdateInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.kpi.activity.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,32 +94,41 @@
         </activity>
         <activity
             android:name="com.kpi.activity.RegisterActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name="com.kpi.activity.SetActivity">
+        <activity
+            android:name="com.kpi.activity.SetActivity"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity
             android:name="com.kpi.activity.BeginHelpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.kpi.activity.PassWordActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name="com.kpi.activity.ForgotPassWordActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.kpi.activity.AboutStormActivity" />
         <activity
             android:name="com.kpi.activity.NowPassWordActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.kpi.activity.FeedBackActivity" />
         <activity
             android:name="com.kpi.activity.InforMessActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.kpi.activity.UpdatePasswordActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 </manifest>

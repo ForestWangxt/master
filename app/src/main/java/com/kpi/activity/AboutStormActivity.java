@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
 
 /**
@@ -29,10 +30,12 @@ public class AboutStormActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        TextView tv_storm_advice = (TextView) findViewById(R.id.tv_storm_advice);
-        TextView tv_storm_gradle = (TextView) findViewById(R.id.tv_storm_gradle);
+        TextView tv_storm_advice = (TextView) findViewById(R.id.tv_storm_advice);   //反馈
+        TextView tv_storm_gradle = (TextView) findViewById(R.id.tv_storm_gradle);  //新版本
+        TextView tv_storm_version = (TextView) findViewById(R.id.tv_storm_version);  //评分
         tv_storm_advice.setOnClickListener(this);
         tv_storm_gradle.setOnClickListener(this);
+        tv_storm_version.setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +50,9 @@ public class AboutStormActivity extends BaseActivity implements View.OnClickList
                 Uri uri = Uri.parse("market://details?id=" + getPackageName());
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                break;
+            case R.id.tv_storm_version:
+                ToastUtils.showMessage(this, "已是最新版本");
                 break;
         }
         startActivity(intent);

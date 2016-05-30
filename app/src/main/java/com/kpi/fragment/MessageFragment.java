@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 
 import com.storm.kpi.R;
 
-public class OtherFragment extends Fragment {
-    public OtherFragment() {
+public class MessageFragment extends Fragment {
+    public MessageFragment() {
     }
 
 
@@ -18,7 +18,7 @@ public class OtherFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_other, container, false);
+        return inflater.inflate(R.layout.fragment_message, container, false);
     }
 
     //延迟Fragment加载

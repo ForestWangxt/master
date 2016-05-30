@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 
+/**
+ * 验证码倒计时
+ */
 public abstract class CountDownTimer {
     private final long mMillisInFuture;
     private final long mCountdownInterval;

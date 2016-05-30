@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -15,6 +14,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp.getInstance().addActivity(this);
         initToolBar();
     }
 
@@ -23,7 +23,6 @@ public class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     @Override
@@ -35,6 +34,7 @@ public class BaseActivity extends AppCompatActivity {
         return false;
     }
 
+
     //返回键
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -44,11 +44,5 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         return false;
-    }
-
-    //设置竖屏
-    @Override
-    public void setRequestedOrientation(int requestedOrientation) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 }

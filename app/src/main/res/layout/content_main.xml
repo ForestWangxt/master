@@ -4,31 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.kpi.activity.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="报表列表"
         android:textSize="16sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="10dp"
-        android:background="#d1cfcf" />
+        android:layout_marginTop="8dp"
+        android:background="#e2e2e2" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -36,93 +34,94 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:background="@drawable/bg_mykpi_item"
+            android:gravity="center"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/a"
-                app:civ_border_color="#f70b0b"
-                app:civ_border_width="2dp" />
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/kpi_index" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="重要KPI指标"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_IndexTrend"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/bg_mykpi_item"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/a"
-                app:civ_border_color="#f70b0b"
-                app:civ_border_width="2dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/index" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="指标趋势图"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_area"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/bg_mykpi_item"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/a"
-                app:civ_border_color="#f70b0b"
-                app:civ_border_width="2dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/area" />
 
             <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:text="区域表现"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_product"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/bg_mykpi_item"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/a"
-                app:civ_border_color="#f70b0b"
-                app:civ_border_width="2dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/product" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="产品表现表现"
-                android:textSize="12sp" />
+                android:text="产品表现"
+                android:textSize="10sp" />
         </LinearLayout>
 
 
@@ -130,9 +129,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -140,21 +138,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/bg_mykpi_item"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/a"
-                app:civ_border_color="#f70b0b"
-                app:civ_border_width="2dp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/error_user" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="异常账户查询"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
 
         </LinearLayout>
@@ -171,14 +168,10 @@
 
         <LinearLayout
             android:layout_width="0dp"
-
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -193,33 +186,26 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_marginTop="10dp"
-        android:background="#d4d4d4" />
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:background="#e2e2e2" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="扫码件数+扫码人数+注册人数"
         android:textSize="16sp" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/home_LineChart"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="8dp"
-        android:layout_weight="6">
+        android:layout_height="230dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp">
 
     </com.github.mikephil.charting.charts.LineChart>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2" />
 
 </LinearLayout>

@@ -10,17 +10,15 @@ import android.widget.TextView;
 
 import com.storm.kpi.R;
 
-
+/**
+ * 用户登录
+ */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
-
-    /**
-     * 用户登录
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login2);
+        setContentView(R.layout.activity_login);
         initToolBar();
         initView();
     }

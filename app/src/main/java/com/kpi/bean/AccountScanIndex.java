@@ -8,16 +8,9 @@ import java.util.List;
 public class AccountScanIndex {
 
 
-    /**
-     * detailList : [{"condition":null,"count":190,"countMom":"29","customerId":"统一阿萨姆[原味奶茶](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":140,"countMom":"12","customerId":"统一绿茶[茉莉](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":120,"countMom":"11","customerId":"统一冰红茶[柠檬](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":null,"countMom":"3","customerId":"饮养四季冰糖雪梨[梨汁饮料](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null}]
-     * msg : 成功
-     */
+
 
     private DataEntity data;
-    /**
-     * data : {"detailList":[{"condition":null,"count":190,"countMom":"29","customerId":"统一阿萨姆[原味奶茶](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":140,"countMom":"12","customerId":"统一绿茶[茉莉](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":120,"countMom":"11","customerId":"统一冰红茶[柠檬](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null},{"condition":null,"count":null,"countMom":"3","customerId":"饮养四季冰糖雪梨[梨汁饮料](PET500*15)","database":null,"ddate":null,"ddatefrom":null,"ddatefromMom":null,"ddateto":null,"ddatetoMom":null,"order":null,"pageCount":null,"pageStart":null}],"msg":"成功"}
-     * success : true
-     */
 
     private boolean success;
 

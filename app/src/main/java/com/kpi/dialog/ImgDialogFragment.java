@@ -13,15 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kpi.view.XCRoundImageView;
+import com.kpi.view.CircleImageView;
 import com.storm.kpi.R;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+
 public class ImgDialogFragment extends DialogFragment implements View.OnClickListener {
-    private XCRoundImageView logo;
+    private CircleImageView logo;
 
     public ImgDialogFragment() {
 
@@ -33,7 +34,6 @@ public class ImgDialogFragment extends DialogFragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getDialog().setTitle("设置头像");
-        //  getDialog().setCanceledOnTouchOutside(false);
         View view = inflater.inflate(R.layout.fragment_img_dialog, container, false);
         initView(view);
         return view;
@@ -43,7 +43,7 @@ public class ImgDialogFragment extends DialogFragment implements View.OnClickLis
         TextView paizhao = (TextView) view.findViewById(R.id.img_dialog_paizhao);
         TextView tuku = (TextView) view.findViewById(R.id.img_dialog_tuku);
         TextView cancel = (TextView) view.findViewById(R.id.img_dialog_cancel);
-        logo = (XCRoundImageView) getActivity().findViewById(R.id.logo);
+        logo = (CircleImageView) getActivity().findViewById(R.id.logo);
         paizhao.setOnClickListener(this);
         tuku.setOnClickListener(this);
         cancel.setOnClickListener(this);
