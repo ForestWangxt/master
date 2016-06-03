@@ -29,7 +29,7 @@ public class AboutStormActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private void initView() {
+    protected void initView() {
         TextView tv_storm_advice = (TextView) findViewById(R.id.tv_storm_advice);   //反馈
         TextView tv_storm_gradle = (TextView) findViewById(R.id.tv_storm_gradle);  //新版本
         TextView tv_storm_version = (TextView) findViewById(R.id.tv_storm_version);  //评分

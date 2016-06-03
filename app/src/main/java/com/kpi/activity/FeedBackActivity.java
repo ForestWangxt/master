@@ -24,7 +24,7 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    private void initView() {
+    protected void initView() {
         editText = (EditText) findViewById(R.id.ed_feedback);
         Button button = (Button) findViewById(R.id.btn_feedback);
         button.setOnClickListener(this);

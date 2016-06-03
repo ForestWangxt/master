@@ -30,7 +30,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void initView() {
+    protected void initView() {
         TextView tv_exit = (TextView) findViewById(R.id.tv_exit);
         TextView tv_update_password = (TextView) findViewById(R.id.tv_update_password);
         tv_exit.setOnClickListener(this);

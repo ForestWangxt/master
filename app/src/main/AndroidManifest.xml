@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--访问相机-->
+    <!-- 访问相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -31,17 +31,16 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="xGiOX64VojzSDGWCK5uUZY6V2hmzFVFc" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
         <activity
             android:name="com.kpi.activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.kpi.activity.KpiIndexActivity"
             android:screenOrientation="portrait" />
@@ -72,9 +71,7 @@
         <activity
             android:name="com.kpi.activity.StormAboutActivity"
             android:screenOrientation="portrait" />
-
         <activity
-
             android:name="com.kpi.activity.InfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -82,13 +79,13 @@
             android:name="com.kpi.activity.UpdateInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.kpi.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -96,22 +93,17 @@
             android:name="com.kpi.activity.RegisterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.kpi.activity.SetActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.kpi.activity.BeginHelpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.kpi.activity.PassWordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name="com.kpi.activity.ForgotPassWordActivity"
             android:screenOrientation="portrait"
@@ -130,5 +122,10 @@
             android:name="com.kpi.activity.UpdatePasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.FindCodeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>

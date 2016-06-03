@@ -67,7 +67,7 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
         }
     }
 
-    private void initView() {
+    protected void initView() {
         mListView = (ListView) findViewById(R.id.Product_ListView);
         mLinearLayout = (LinearLayout) findViewById(R.id.show_hide_product_layout);
         RadioButton rb_product_select = (RadioButton) findViewById(R.id.rb_product_select);
@@ -173,7 +173,6 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 ToastUtils.show(ProductPerformanceActivity.this);
-
             }
         });
         queue.add(request);

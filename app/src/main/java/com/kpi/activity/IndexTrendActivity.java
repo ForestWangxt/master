@@ -91,7 +91,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
     }
 
     //初始化控件
-    private void initView() {
+    protected void initView() {
         mLineChart = (LineChart) findViewById(R.id.lineChart);
         XAxis xAxis = mLineChart.getXAxis();
         //设置X轴的文字在底部

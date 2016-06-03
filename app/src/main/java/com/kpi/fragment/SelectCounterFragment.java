@@ -2,8 +2,8 @@ package com.kpi.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,34 +28,40 @@ import com.storm.kpi.R;
 /**
  * 门店查询
  */
-public class SelectCounterFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class SelectCounterFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, SearchView.OnQueryTextListener {
     private TextureMapView mMapView;
     private LocationClient mLocClient;
     private BaiduMap mBaiduMap;
     public MyLocationListener myListener;
     private boolean isFirst = false;
+    private SearchView searchView;
 
     public SelectCounterFragment() {
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_counter, container, false);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view) {
         //获取地图控件引用
         mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
         RadioGroup rg = (RadioGroup) view.findViewById(R.id.rg);
-        ImageView img_location = (ImageView) getActivity().findViewById(R.id.img_location);
+        ImageView img_location = (ImageView) view.findViewById(R.id.img_location);
+        searchView = (SearchView) view.findViewById(R.id.select_SearchView);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);//是否显示确认搜索按钮
+        searchView.setIconified(false);//设置搜索框默认展开
+        searchView.onActionViewExpanded();//表示在内容为空时不显示取消的x按钮，内容不为空时显示.
         img_location.setOnClickListener(this);
         rg.setOnCheckedChangeListener(this);
-        return view;
     }
+
 
     @Override
     public void onDestroy() {
@@ -127,6 +133,17 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
                 mBaiduMap.setMapType(BaiduMap.MAP_TYPE_SATELLITE);
                 break;
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        return true;
     }
 
     public class MyLocationListener implements BDLocationListener {

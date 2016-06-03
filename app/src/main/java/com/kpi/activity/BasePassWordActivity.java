@@ -1,5 +1,6 @@
 package com.kpi.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.kpi.utils.ToastUtils;
+import com.kpi.utils.code;
 import com.storm.kpi.R;
 
 /**
@@ -41,7 +43,7 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
         }
     }
 
-    private void initView() {
+    protected void initView() {
         textInputLayout1 = (TextInputLayout) findViewById(R.id.password_TextInputLayout1);
         textInputLayout2 = (TextInputLayout) findViewById(R.id.password_TextInputLayout2);
         ed_password1 = (EditText) findViewById(R.id.ed_reg_password1);
@@ -54,7 +56,13 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
     @Override
     public void onClick(View v) {
         if (checkPassword()) {
-            ToastUtils.showMessage(this, "注册成功!");
+            if (code.a == 1) {
+                ToastUtils.showMessage(this, "注册成功!");
+            } else {
+                ToastUtils.showMessage(this, "找回密码成功!");
+            }
+            startActivity(new Intent(this, LoginActivity.class));
+            this.finish();
         }
     }
 

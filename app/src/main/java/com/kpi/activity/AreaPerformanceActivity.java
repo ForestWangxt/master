@@ -79,7 +79,7 @@ public class AreaPerformanceActivity extends BaseActivity implements RadioGroup.
         }
     }
 
-    private void initView() {
+    protected void initView() {
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rg_AreaPerformance);
         RadioGroup rg_area = (RadioGroup) findViewById(R.id.rg_area);
         mListView = (ListView) findViewById(R.id.mListView);

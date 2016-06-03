@@ -64,7 +64,7 @@ public class AccountDetailActivity extends BaseActivity {
         }
     }
 
-    private void initView() {
+    protected void initView() {
         tv_accountId = (TextView) findViewById(R.id.tv_account_id);
         tv_accountName = (TextView) findViewById(R.id.tv_account_name);
         tv_shop = (TextView) findViewById(R.id.tv_account_shopname);

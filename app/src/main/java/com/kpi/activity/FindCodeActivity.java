@@ -10,46 +10,52 @@ import com.kpi.utils.CountDownTimer;
 import com.kpi.utils.code;
 import com.storm.kpi.R;
 
-/**
- * 用户注册  ————>通过手机号完成验证码验证功能
- */
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class FindCodeActivity extends BaseActivity implements View.OnClickListener {
     private Button btn_code;
+    private Button btn_find_next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        code.a = 1;
-        initTooBar();
-        Button btn_register_next = (Button) findViewById(R.id.btn_register_next);
-        btn_code = (Button) findViewById(R.id.btn_get_code);
-        btn_code.setOnClickListener(this);
-        btn_register_next.setOnClickListener(this);
+        setContentView(R.layout.activity_find_code);
+        code.a = 2;
+        initToolBar();
+        initView();
+
     }
 
-    private void initTooBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.reg_toolbar);
+    //初始化头部的ToolBar
+    protected void initToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.code_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setTitle("");
-                getSupportActionBar().setHomeAsUpIndicator(R.mipmap.left);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+            getSupportActionBar().setTitle("");
+            getSupportActionBar().setHomeAsUpIndicator(R.mipmap.left);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    protected void initView() {
+        btn_code = (Button) findViewById(R.id.btn_find_code);
+        btn_find_next = (Button) findViewById(R.id.btn_find_next);
+
+        btn_code.setOnClickListener(this);
+        btn_find_next.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_register_next:
-                startActivity(new Intent(this, PassWordActivity.class));
-                this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-                break;
-            case R.id.btn_get_code:
+            case R.id.btn_find_code:
                 new TimeCount(60 * 1000, 1000).start();
                 break;
+            case R.id.btn_find_next:
+                Intent intent = new Intent(this, PassWordActivity.class);
+                intent.putExtra("title", "忘记密码");
+                startActivity(intent);
+                this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                break;
+
         }
     }
 

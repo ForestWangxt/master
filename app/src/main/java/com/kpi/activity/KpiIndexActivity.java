@@ -74,15 +74,11 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
                 android.R.color.holo_orange_light, android.R.color.holo_red_light);
-
-
-        swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(this);
         initView();
 
-
         if (NetUtils.isNetworkConnected(this)) {
-            RequestKpiIndex();
+            refresh();
         }
     }
 
@@ -94,7 +90,7 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     //初始化控件
-    private void initView() {
+    protected void initView() {
         tv_ScanCountToday = (TextView) findViewById(R.id.tv_kpi_ScanCountToday);
         tv_ScanCountTodayMom = (TextView) findViewById(R.id.tv_kpi_ScanCountTodayMom);
         tv_ScanCountWeekName = (TextView) findViewById(R.id.tv_kpi_ScanCountWeekName);
@@ -146,7 +142,6 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
                 ToastUtils.show(KpiIndexActivity.this);
             }
         });
-        swipeRefreshLayout.setRefreshing(false);
         //添加到请求队列中
         queue.add(jsonRequest);
 
@@ -156,6 +151,7 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
     private void UpdateKpiIndexValue() {
         KpiIndex.DataEntity mDataEntity = mKpiIndex.getData();
         if (mDataEntity != null) {
+            closeRefresh();
             KpiIndex.DataEntity.DataListEntity dataListEntity = mDataEntity.getDataList();
             tv_ScanCountToday.setText(String.valueOf(dataListEntity.getScanCountToday()));
             tv_ScanCountTodayMom.setText(dataListEntity.getScanCountTodayMom());
@@ -185,7 +181,27 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
         } else {
             ToastUtils.show(this);
         }
+
+
     }
 
+    private void refresh() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                RequestKpiIndex();
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+    }
 
+    private void closeRefresh() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+                RequestKpiIndex();
+            }
+        });
+    }
 }

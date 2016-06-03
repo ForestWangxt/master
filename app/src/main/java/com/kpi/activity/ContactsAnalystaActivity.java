@@ -19,7 +19,7 @@ public class ContactsAnalystaActivity extends BaseActivity {
         initView();
     }
 
-    private void initView() {
+    protected void initView() {
         DialogUtils.showProgressDialog(this, "正在加载...");
         smartImageView.setImageUrl("http://192.168.0.19:4444/image/touchMe.jpg");
         DialogUtils.dissmissProgressDialog();

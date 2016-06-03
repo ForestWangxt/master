@@ -65,7 +65,7 @@ public class UnusualAccountActivity extends BaseActivity implements View.OnClick
         }
     }
 
-    private void initView() {
+    protected void initView() {
         tv_account_date = (TextView) findViewById(R.id.tv_account_date);
         tv_account_date.setText(DateUtil.CurrentDay());
         mListView = (ListView) findViewById(R.id.list_account);

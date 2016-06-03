@@ -24,7 +24,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     public void initToolBar() {
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -32,7 +31,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void initView() {
+    protected void initView() {
         Button btn_login = (Button) findViewById(R.id.btn_user_login);
         TextView tv_user_reg = (TextView) findViewById(R.id.tv_user_reg);
         TextView tv_user_forgetPassword = (TextView) findViewById(R.id.tv_user_forgetPassword);
@@ -58,7 +57,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
             case R.id.tv_user_forgetPassword:
-                intent = new Intent(this, ForgotPassWordActivity.class);
+                intent = new Intent(this, FindCodeActivity.class);
                 startActivity(intent);
                 this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;

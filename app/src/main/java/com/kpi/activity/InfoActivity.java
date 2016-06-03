@@ -41,7 +41,7 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void initView() {
+    protected void initView() {
         RelativeLayout update_logo = (RelativeLayout) findViewById(R.id.update_logo);   ///更新头像
         RelativeLayout update_username = (RelativeLayout) findViewById(R.id.update_username);  //更新姓名
         RelativeLayout update_sex = (RelativeLayout) findViewById(R.id.update_sex); //更新性别

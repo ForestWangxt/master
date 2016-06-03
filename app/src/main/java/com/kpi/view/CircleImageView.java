@@ -23,6 +23,9 @@ import android.widget.ImageView;
 
 import com.storm.kpi.R;
 
+/**
+ * 圆形图片
+ */
 public class CircleImageView extends ImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;

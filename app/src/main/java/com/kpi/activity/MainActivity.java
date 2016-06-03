@@ -2,7 +2,6 @@ package com.kpi.activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +10,8 @@ import android.widget.RadioGroup;
 
 import com.kpi.adapter.viewPagerAdapter;
 import com.kpi.fragment.HomeFragment;
-import com.kpi.fragment.MyKPIFragment;
 import com.kpi.fragment.MessageFragment;
+import com.kpi.fragment.MyKPIFragment;
 import com.kpi.fragment.SelectCounterFragment;
 import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
@@ -48,13 +47,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    protected void initToolBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("");
-        }
-    }
+
 
     //初始化布局
     private void initViews() {

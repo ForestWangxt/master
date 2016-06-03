@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/tv_info_username"
+            android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -43,7 +43,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn"
-        android:text="完成注册"
+        android:text="确定"
         android:textColor="#fff"
         android:textSize="16sp" />
 </LinearLayout>

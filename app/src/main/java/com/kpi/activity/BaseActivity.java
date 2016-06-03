@@ -15,9 +15,33 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApp.getInstance().addActivity(this);
-        initToolBar();
     }
 
+    /**
+     *初始化控件
+     */
+    protected void initView() {
+
+    }
+
+    /**
+     * 布局
+     *
+     * @return
+     */
+    protected int getLayoutId() {
+        return 0;
+    }
+
+    /**
+     * 初始化数据
+     */
+    protected void initData(){
+
+    }
+    /**
+     * ToolBar
+     */
     protected void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("");
@@ -25,6 +49,12 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 返回的箭头
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
