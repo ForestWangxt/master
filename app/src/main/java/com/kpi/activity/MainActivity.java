@@ -1,10 +1,8 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -27,14 +25,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private RadioButton radioButton4;
     private RadioButton radioButton5;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_bar_main);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        initFragment();
-        initViews();
-        initToolBar();
 
 //        //抽屉式布局
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -45,12 +35,27 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //        toggle.setHomeAsUpIndicator(new ColorDrawable(Color.WHITE));
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(this);
+
+
+    @Override
+    public void initData() {
+        initFragment();
     }
 
+    @Override
+    public int getLayoutID() {
+        return R.layout.app_bar_main;
+    }
 
+    @Override
+    public void initToolBar() {
 
+    }
+
+    @Override
     //初始化布局
-    private void initViews() {
+    public void initView() {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.home);
         radioButton1 = (RadioButton) findViewById(R.id.rb_home);
         radioButton2 = (RadioButton) findViewById(R.id.rb_redian);
@@ -61,18 +66,23 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
 
+    @Override
+    public void initListener() {
+
+    }
+
+
     //初始化Fragment
     private void initFragment() {
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new HomeFragment());  //主页面
         adapter.AddFragment(new MessageFragment());   //消息
         adapter.AddFragment(new SelectCounterFragment());   //门店查询
-        //adapter.AddFragment(new ContactsFragment());
         adapter.AddFragment(new MyKPIFragment());    //我的智码
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new onPageChange());
-        viewPager.setOffscreenPageLimit(3);
         viewPager.setPageTransformer(true, new DepthPageTransformer());
+        viewPager.setOffscreenPageLimit(adapter.getCount());
     }
 
 
@@ -102,22 +112,18 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     //RadioGroup监听事件
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        ImageView img_location = (ImageView) findViewById(R.id.img_location);
         switch (checkedId) {
             case R.id.rb_home:
                 viewPager.setCurrentItem(0);
                 radioButton1.setChecked(true);
-                img_location.setVisibility(View.GONE);
                 break;
             case R.id.rb_redian:
                 viewPager.setCurrentItem(1);
                 radioButton2.setChecked(true);
-                img_location.setVisibility(View.GONE);
                 break;
             case R.id.rb_shiting:
                 viewPager.setCurrentItem(2);
                 radioButton3.setChecked(true);
-                img_location.setVisibility(View.VISIBLE);
                 break;
             //       case R.id.rb_shezhi:
             //       viewPager.setCurrentItem(3);
@@ -126,7 +132,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             case R.id.rb_MyKPI:
                 viewPager.setCurrentItem(4);
                 radioButton5.setChecked(true);
-                img_location.setVisibility(View.GONE);
                 break;
 
         }
@@ -158,7 +163,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 case 4:
                     radioButton5.setChecked(true);
                     break;
+
             }
+            viewPager.setCurrentItem(position);
+
         }
 
         @Override

@@ -6,16 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.kpi.bean.Product;
+
+import com.kpi.bean.ProductIndex;
 import com.storm.kpi.R;
+
 import java.util.ArrayList;
 
 
 public class ProductListViewAdapter extends BaseAdapter {
-    private ArrayList<Product> areaBeanArrayList;
+    private ArrayList<ProductIndex.DataEntity.DataListTotilEntity> areaBeanArrayList;
     private Context context;
 
-    public ProductListViewAdapter(ArrayList<Product> areaBeanArrayList, Context context) {
+    public ProductListViewAdapter(ArrayList<ProductIndex.DataEntity.DataListTotilEntity> areaBeanArrayList, Context context) {
         this.areaBeanArrayList = areaBeanArrayList;
         this.context = context;
     }
@@ -51,10 +53,10 @@ public class ProductListViewAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.productName.setText(areaBeanArrayList.get(position).getProductName());
-        viewHolder.productCount.setText(areaBeanArrayList.get(position).getProductCount());
-        viewHolder.productMom.setText(areaBeanArrayList.get(position).getProductMom());
-        viewHolder.productCustomer.setText(areaBeanArrayList.get(position).getProductCustomer());
-        viewHolder.productCustomerMom.setText(areaBeanArrayList.get(position).getProductCustomerMom());
+        viewHolder.productCount.setText(String.valueOf(areaBeanArrayList.get(position).getScanCount()));
+        viewHolder.productMom.setText(areaBeanArrayList.get(position).getScanCountMom());
+        viewHolder.productCustomer.setText(String.valueOf(areaBeanArrayList.get(position).getScanCustomerCount()));
+        viewHolder.productCustomerMom.setText(areaBeanArrayList.get(position).getScanCustomerCountMom());
         return convertView;
     }
 

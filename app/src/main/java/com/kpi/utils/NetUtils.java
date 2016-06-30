@@ -16,7 +16,6 @@ public class NetUtils {
                     .getActiveNetworkInfo();
             if (mNetworkInfo != null) {
                 return mNetworkInfo.isAvailable();       // 网络可用
-
             } else {
                 ToastUtils.showMessage(context, "请检查你的网络!");
                 return false;

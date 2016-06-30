@@ -1,7 +1,6 @@
 package com.kpi.activity;
 
 import android.app.DatePickerDialog;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -59,27 +58,28 @@ public class AreaPerformanceActivity extends BaseActivity implements RadioGroup.
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_area_performance);
+    public int getLayoutID() {
+        return R.layout.activity_area_performance;
+    }
+
+    @Override
+    public void initData() {
         queue = Volley.newRequestQueue(this);
-        initToolBar();
-        initView();
         UrlUtils.btn = "1";
         showProgressDialog();
         if (NetUtils.isNetworkConnected(this)) {
             RequestAreaValue();
         }
     }
-
-    protected void initToolBar() {
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("区域表现");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
-    protected void initView() {
+    @Override
+    public void initView() {
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rg_AreaPerformance);
         RadioGroup rg_area = (RadioGroup) findViewById(R.id.rg_area);
         mListView = (ListView) findViewById(R.id.mListView);
@@ -143,8 +143,6 @@ public class AreaPerformanceActivity extends BaseActivity implements RadioGroup.
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     UrlUtils.type = String.valueOf(position + 1);
-
-
                 }
 
                 @Override
@@ -155,6 +153,15 @@ public class AreaPerformanceActivity extends BaseActivity implements RadioGroup.
 
         }
     }
+
+
+
+    @Override
+    public void initListener() {
+
+    }
+
+
 
     private void showProgressDialog() {
         DialogUtils.showProgressDialog(this, "数据加载中...");

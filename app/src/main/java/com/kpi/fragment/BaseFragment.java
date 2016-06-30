@@ -6,15 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.kpi.interfaces.UiOperation;
 
 
 public abstract class BaseFragment extends Fragment implements UiOperation {
     public View rootView;
+    public RequestQueue queue;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutID(), null);
+        queue = Volley.newRequestQueue(getActivity());
         initView();
         initData();
         initListener();

@@ -2,89 +2,132 @@ package com.kpi.fragment;
 
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
 import com.kpi.activity.AreaPerformanceActivity;
 import com.kpi.activity.IndexTrendActivity;
 import com.kpi.activity.KpiIndexActivity;
 import com.kpi.activity.ProductPerformanceActivity;
 import com.kpi.activity.UnusualAccountActivity;
-import com.kpi.bean.KpiTrend;
+import com.kpi.bean.KpiIndex;
 import com.kpi.utils.JsonRequest;
 import com.kpi.utils.NetUtils;
+import com.kpi.utils.ToastUtils;
 import com.kpi.utils.UrlUtils;
 import com.storm.kpi.R;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 动态智码Fragment
  */
-public class HomeFragment extends Fragment implements View.OnClickListener {
-    private LineChart mLineChart;
-    private RequestQueue queue;
-    private KpiTrend mKpiTrend;
+public class HomeFragment extends BaseFragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, Response.Listener<JSONObject>, Response.ErrorListener {
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView tv_ScanCountToday;    //当日扫码件数
+    private TextView tv_ScanCountTodayMom;
 
-    public HomeFragment() {
+    private TextView tv_ScanCountWeekName;    //7日(十万)
+    private TextView tv_ScanCountWeek;       //7日(十万)————》value
+    private TextView tv_ScanCountWeekMom;    //日环
+
+    private TextView tv_ScanCountMonthName;  //月(十万)
+    private TextView tv_ScanCountMonth;       //月(十万)————》value
+    private TextView tv_ScanCountMonthMom;   //月环
+
+    private TextView tv_ScanCountYearName;  //年(十万)
+    private TextView tv_ScanCountYear;      //年(十万)————》value
+    private TextView tv_ScanCountYearMom;   //年环
+
+    private TextView tv_CustomerCountToday; //当日扫码人数
+    private TextView tv_CustomerCountTodayMom;
+
+    private TextView tv_CustomerCountWeekName; //7日
+    private TextView tv_CustomerCountWeek;  //7日 ——》value
+    private TextView tv_CustomerCountWeekMom; //环
+
+    private TextView tv_CustomerCountMonthName; //当月
+    private TextView tv_CustomerCountMonth;   //当月-->value
+    private TextView tv_CustomerCountMonthMom;   //环
+
+    private TextView tv_CustomerCountYearName;  //年(十万)
+    private TextView tv_CustomerCountYear;  //年(十万)  ---》value
+    private TextView tv_CustomerCountYearMom;  //年(十万)  ————》环
+    private KpiIndex mKpiIndex;
+
+    @Override
+    public int getLayoutID() {
+        return R.layout.content_main;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        queue = Volley.newRequestQueue(getActivity());
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        UrlUtils.qSearchType = "1";
-        View view = inflater.inflate(R.layout.content_main, container, false);
-        initView(view);
-        if (NetUtils.isNetworkConnected(getActivity())) {
-            RequestChartValue();
-        }
-        return view;
-
-    }
-
-    private void initView(View view) {
-        LinearLayout KpiIndex = (LinearLayout) view.findViewById(R.id.layout_kpiIndex); //重要KPI指标
-        LinearLayout indexTrend = (LinearLayout) view.findViewById(R.id.layout_IndexTrend);  //指标趋势
-        LinearLayout areaPer = (LinearLayout) view.findViewById(R.id.layout_area);     //区域表现
-        LinearLayout productPer = (LinearLayout) view.findViewById(R.id.layout_product);  //产品表现
-        LinearLayout unusualAccount = (LinearLayout) view.findViewById(R.id.layout_unusual);  //异常账户
-        mLineChart = (LineChart) view.findViewById(R.id.home_LineChart);   //折线图表
+    public void initView() {
+        //设置swipeRefresh下拉图标颜色
+        swipeRefreshLayout = findView(R.id.home_refresh);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        LinearLayout KpiIndex = findView(R.id.layout_kpiIndex); //重要KPI指标
+        LinearLayout indexTrend = findView(R.id.layout_IndexTrend);  //指标趋势
+        LinearLayout areaPer = findView(R.id.layout_area);     //区域表现
+        LinearLayout productPer = findView(R.id.layout_product);  //产品表现
+        LinearLayout unusualAccount = findView(R.id.layout_unusual);  //异常账户
         KpiIndex.setOnClickListener(this);
         indexTrend.setOnClickListener(this);
         areaPer.setOnClickListener(this);
         productPer.setOnClickListener(this);
         unusualAccount.setOnClickListener(this);
+
+        tv_ScanCountToday = findView(R.id.tv_kpi_ScanCountToday);
+        tv_ScanCountTodayMom = findView(R.id.tv_kpi_ScanCountTodayMom);
+        tv_ScanCountWeekName = findView(R.id.tv_kpi_ScanCountWeekName);
+        tv_ScanCountWeek = findView(R.id.tv_kpi_ScanCountWeek);
+        tv_ScanCountWeekMom = findView(R.id.tv_kpi_ScanCountWeekMom);
+        tv_ScanCountMonthName = findView(R.id.tv_kpi_ScanCountMonthName);
+        tv_ScanCountMonth = findView(R.id.tv_kpi_ScanCountMonth);
+        tv_ScanCountMonthMom = findView(R.id.tv_kpi_ScanCountMonthMom);
+        tv_ScanCountYearName = findView(R.id.tv_kpi_ScanCountYearName);
+        tv_ScanCountYear = findView(R.id.tv_kpi_ScanCountYear);
+        tv_ScanCountYearMom = findView(R.id.tv_kpi_ScanCountYearMom);
+        tv_CustomerCountToday = findView(R.id.tv_kpi_CustomerCountToday);
+        tv_CustomerCountTodayMom = findView(R.id.tv_kpi_CustomerCountTodayMom);
+        tv_CustomerCountWeekName = findView(R.id.tv_kpi_CustomerCountWeekName);
+        tv_CustomerCountWeek = findView(R.id.tv_kpi_CustomerCountWeek);
+        tv_CustomerCountWeekMom = findView(R.id.tv_kpi_CustomerCountWeekMom);
+        tv_CustomerCountMonthName = findView(R.id.tv_kpi_CustomerCountMonthName);
+        tv_CustomerCountMonth = findView(R.id.tv_kpi_CustomerCountMonth);
+        tv_CustomerCountMonthMom = findView(R.id.tv_kpi_CustomerCountMonthMom);
+        tv_CustomerCountYearName = findView(R.id.tv_kpi_CustomerCountYearName);
+        tv_CustomerCountYear = findView(R.id.tv_kpi_CustomerCountYear);
+        tv_CustomerCountYearMom = findView(R.id.tv_kpi_CustomerCountYearMom);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+        UrlUtils.qSearchType = "1";
+        if (NetUtils.isNetworkConnected(getActivity())) {
+            refresh();
+        }
+    }
+
+    @Override
+    public void initToolBar() {
+
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent=null;
+        Intent intent = null;
         switch (v.getId()) {
             case R.id.layout_kpiIndex:
                 intent = new Intent(getActivity(), KpiIndexActivity.class);
@@ -103,81 +146,88 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    @Override
+    public void onRefresh() {
+        if (NetUtils.isNetworkConnected(getActivity())) {
+            RequestKpiIndex();
+        }
+    }
+
+    //请求KPI数据
+    private void RequestKpiIndex() {
+        JsonRequest jsonRequest = new JsonRequest(UrlUtils.KpiIndex_url, null, this, this);
+        //添加到请求队列中
+        queue.add(jsonRequest);
 
     }
 
-    private void RequestChartValue() {
-        JsonRequest request = new JsonRequest(new UrlUtils().KpiTrend_url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                mKpiTrend = new Gson().fromJson(jsonObject.toString(), KpiTrend.class);
-                if (mKpiTrend.isSuccess()) {
-                    UpdateChartValue();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
+    @Override
+    public void onResponse(JSONObject jsonObject) {
+        mKpiIndex = new Gson().fromJson(jsonObject.toString(), KpiIndex.class);
+        if (mKpiIndex.isSuccess()) {
+            UpdateKpiIndexValue();
+        }
+    }
 
+    //更新Kpi指数数据
+    private void UpdateKpiIndexValue() {
+        KpiIndex.DataEntity mDataEntity = mKpiIndex.getData();
+        if (mDataEntity != null) {
+            closeRefresh();
+            KpiIndex.DataEntity.DataListEntity dataListEntity = mDataEntity.getDataList();
+            tv_ScanCountToday.setText(String.valueOf(dataListEntity.getScanCountToday()));
+            tv_ScanCountTodayMom.setText(dataListEntity.getScanCountTodayMom());
+            tv_ScanCountWeekName.setText((dataListEntity.getScanCountWeekName()) + ":");
+            tv_ScanCountWeek.setText(String.valueOf(dataListEntity.getScanCountWeek()));
+            tv_ScanCountWeekMom.setText(dataListEntity.getScanCountWeekMom());
+            tv_ScanCountMonthName.setText((dataListEntity.getScanCountMonthName()) + ":");
+            tv_ScanCountMonth.setText(String.valueOf(dataListEntity.getScanCountMonth()));
+            tv_ScanCountMonthMom.setText(dataListEntity.getScanCountMonthMom());
+            tv_ScanCountYearName.setText((dataListEntity.getScanCountYearName()) + ":");
+            tv_ScanCountYear.setText(String.valueOf(dataListEntity.getScanCountYear()));
+            tv_ScanCountYearMom.setText(dataListEntity.getScanCountYearMom());
+            tv_CustomerCountToday.setText(String.valueOf(dataListEntity.getCustomerCountToday()));
+            tv_CustomerCountTodayMom.setText(dataListEntity.getCustomerCountTodayMom());
+            tv_CustomerCountWeekName.setText(dataListEntity.getCustomerCountWeekName());
+            tv_CustomerCountWeek.setText(String.valueOf(dataListEntity.getCustomerCountWeek()));
+            tv_CustomerCountWeekMom.setText(dataListEntity.getCustomerCountWeekMom());
+            tv_CustomerCountMonthName.setText(dataListEntity.getCustomerCountMonthName() + ":");
+            tv_CustomerCountMonth.setText(String.valueOf(dataListEntity.getCustomerCountMonth()));
+            tv_CustomerCountMonthMom.setText(dataListEntity.getCustomerCountMonthMom());
+            tv_CustomerCountYearName.setText(dataListEntity.getCustomerCountYearName() + ":");
+            tv_CustomerCountYear.setText(String.valueOf(dataListEntity.getCustomerCountYear()));
+            tv_CustomerCountYearMom.setText(dataListEntity.getCustomerCountYearMom());
+        } else {
+            ToastUtils.show(getActivity());
+        }
+    }
+
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        ToastUtils.showMessage(getActivity(), "服务器似乎出了点问题!");
+    }
+
+
+    private void refresh() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                RequestKpiIndex();
+                swipeRefreshLayout.setRefreshing(true);
             }
         });
-        queue.add(request);
     }
 
-    private void UpdateChartValue() {
-        XAxis xAxis = mLineChart.getXAxis();
-        //设置X轴的文字在底部
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        //设置描述文字
-        mLineChart.setDescription("一周走势图");
-        KpiTrend.DataEntity dateEntity = mKpiTrend.getData();
-        List<KpiTrend.DataEntity.DataListDetailEntity> list = dateEntity.getDataListDetail();
-        ArrayList<String> xValues = new ArrayList<>();
-        //模拟第二组组y轴数据(存放y轴数据的是一个Entry的ArrayList) 他是构建LineDataSet的参数之一
-        ArrayList<Entry> scanCount = new ArrayList<>();
-        ArrayList<Entry> customerCount = new ArrayList<>();
-        ArrayList<Entry> addCount = new ArrayList<>();
-        for (int i = 0, count = list.size(); i < count; i++) {
-            //时间-->X轴
-            xValues.add(list.get(i).getDateMd());
-            //扫码件数
-            scanCount.add(new Entry(list.get(i).getScanCount(), i));
-            //扫码人数
-            customerCount.add(new Entry(list.get(i).getCustomerCount(), i));
-            //注册人数
-            addCount.add(new Entry(list.get(i).getAddCount(), i));
-        }
-        LineDataSet scanCountSet = new LineDataSet(scanCount, "扫码件数");
-        scanCountSet.setColor(Color.RED);
-        scanCountSet.setHighLightColor(Color.RED);
-
-
-        LineDataSet customerCountSet = new LineDataSet(customerCount, "扫码人数");
-        customerCountSet.setColor(Color.BLUE);
-        customerCountSet.setHighLightColor(Color.BLUE);
-
-        LineDataSet addCountSet = new LineDataSet(addCount, "注册人数");
-        addCountSet.setColor(Color.GREEN);
-        addCountSet.setHighLightColor(Color.GREEN);
-
-
-        //构建一个类型为LineDataSet的ArrayList 用来存放所有y的LineDataSet
-        // 他是构建最终加入LineChart数据集所需要的参数
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(scanCountSet);
-        dataSets.add(customerCountSet);
-        dataSets.add(addCountSet);
-
-        //构建一个LineData 将dataSets放入
-        LineData lineData = new LineData(xValues, dataSets);
-        mLineChart.animateX(2000); // 立即执行的动画,x轴
-        mLineChart.animateY(2000); // 立即执行的动画,Y轴
-        mLineChart.setDragEnabled(true);// 是否可以拖拽
-        mLineChart.setScaleEnabled(true);// 是否可以缩放
-        //设置不绘画值
-        lineData.setDrawValues(true);
-        //将数据插入
-        mLineChart.setData(lineData);
+    private void closeRefresh() {
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }

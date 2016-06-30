@@ -1,7 +1,6 @@
 package com.kpi.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -13,17 +12,32 @@ import com.storm.kpi.R;
  */
 public class NowPassWordActivity extends BaseActivity implements View.OnClickListener {
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_pass_word);
+    public int getLayoutID() {
+        return R.layout.activity_update_pass_word;
+    }
+
+    @Override
+    public void initView() {
         Button btn_now_next = (Button) findViewById(R.id.btn_now_next);
         btn_now_next.setOnClickListener(this);
-        initToolBar();
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     //初始化头部的ToolBar
-    protected void initToolBar() {
+    @Override
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.now_password_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

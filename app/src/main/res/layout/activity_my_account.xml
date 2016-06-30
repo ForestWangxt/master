@@ -6,6 +6,4 @@
     android:fitsSystemWindows="true"
     tools:context="com.kpi.activity.MyAccountActivity">
 
-
-
 </RelativeLayout>

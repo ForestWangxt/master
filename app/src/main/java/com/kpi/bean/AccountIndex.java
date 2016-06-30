@@ -2,9 +2,7 @@ package com.kpi.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/3/30.
- */
+
 public class AccountIndex {
 
 
@@ -29,21 +27,6 @@ public class AccountIndex {
 
     public static class DataEntity {
         private String msg;
-        /**
-         * condition : null
-         * count : 19
-         * countMom : null
-         * customerId : CU160100001606
-         * database : null
-         * ddate : null
-         * ddatefrom : null
-         * ddatefromMom : null
-         * ddateto : null
-         * ddatetoMom : null
-         * order : null
-         * pageCount : null
-         * pageStart : null
-         */
 
         private List<DataListAscEntity> dataListAsc;
 

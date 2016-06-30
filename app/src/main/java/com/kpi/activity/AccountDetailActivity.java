@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -43,28 +42,32 @@ public class AccountDetailActivity extends BaseActivity {
     private AccountScanIndex accountScanIndex;
     private ListView list_record;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_detail);
+    public void initData() {
         UrlUtils.accountId = getIntent().getStringExtra("accountId");  //客户Id;
         queue = Volley.newRequestQueue(this);
-        initToolBar();
-        initView();
         if (NetUtils.isNetworkConnected(this)) {
             requestAccountDetail();
             requestProductDay();
         }
+
     }
 
-    protected void initToolBar() {
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_account_detail;
+    }
+
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("客户信息");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    protected void initView() {
+    public void initView() {
         tv_accountId = (TextView) findViewById(R.id.tv_account_id);
         tv_accountName = (TextView) findViewById(R.id.tv_account_name);
         tv_shop = (TextView) findViewById(R.id.tv_account_shopname);
@@ -127,6 +130,12 @@ public class AccountDetailActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+
+    @Override
+    public void initListener() {
+
     }
 
 

@@ -1,8 +1,6 @@
 package com.kpi.bean;
 
-/**
- * Created by Administrator on 2016/5/19.
- */
+
 public class InforMess {
     private String titles;//标题
     private String abst;//摘要

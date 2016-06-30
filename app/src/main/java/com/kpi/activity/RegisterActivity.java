@@ -1,7 +1,6 @@
 package com.kpi.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -17,18 +16,31 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private Button btn_code;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        code.a = 1;
-        initTooBar();
+    public int getLayoutID() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    public void initView() {
         Button btn_register_next = (Button) findViewById(R.id.btn_register_next);
         btn_code = (Button) findViewById(R.id.btn_get_code);
         btn_code.setOnClickListener(this);
         btn_register_next.setOnClickListener(this);
     }
 
-    private void initTooBar() {
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+        code.a = 1;
+
+    }
+
+    @Override
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.reg_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

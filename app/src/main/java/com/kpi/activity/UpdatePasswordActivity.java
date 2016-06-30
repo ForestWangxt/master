@@ -1,15 +1,8 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
-
 import com.storm.kpi.R;
 
-public class UpdatePasswordActivity extends BasePassWordActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+public abstract  class UpdatePasswordActivity extends BasePassWordActivity {
 
     @Override
     protected int getLayoutId() {

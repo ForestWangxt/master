@@ -1,8 +1,6 @@
 package com.kpi.bean;
 
-/**
- * Created by Administrator on 2016/3/24.
- */
+
 public class AreaBean {
     private String area;  //地区
     private String scanCount; //件数

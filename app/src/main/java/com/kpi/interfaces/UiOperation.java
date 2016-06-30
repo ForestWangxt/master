@@ -3,23 +3,15 @@ package com.kpi.interfaces;
 /**
  * UI操作接口
  */
-public interface UiOperation  {
-    /*
-       初始化View
-     */
-    public abstract void initView();
+public interface UiOperation {
+    abstract int getLayoutID();
 
-    /*
-    返回不同页面的布局ID
-     */
-    public abstract int getLayoutID();
+    abstract void initView();
 
-    //初始化监听器
-    public abstract void initListener();
+    abstract void initListener();
 
-    //初始化数据
-    public abstract void initData();
+    abstract void initData();
 
-    public abstract void initToolBar();
+    abstract void initToolBar();
 
 }

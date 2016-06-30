@@ -9,7 +9,6 @@ import android.widget.ListView;
  * 重新计算ListView的高度
  */
 public class ListViewUtils {
-
     /**
      * 重新计算ListView的高度，解决ScrollView和ListView两个View都有滚动的效果，在嵌套使用时起冲突的问题
      *

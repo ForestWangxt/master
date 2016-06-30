@@ -4,7 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
- * 进度对话框
+ * ProgressDialog.STYLE_SPINNER
  */
 public class DialogUtils {
     private static ProgressDialog ProgressDialog;

@@ -14,7 +14,7 @@ public class ToastUtils {
             mToast.cancel();
             mToast = null;
         }
-        mToast = Toast.makeText(context, "连接超时！", Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(context.getApplicationContext(), "连接超时！", Toast.LENGTH_SHORT);
         mToast.show();
     }
 
@@ -23,7 +23,7 @@ public class ToastUtils {
             mToast.cancel();
             mToast = null;
         }
-        mToast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        mToast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
         mToast.show();
     }
 

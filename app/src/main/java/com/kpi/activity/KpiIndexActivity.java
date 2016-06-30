@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import org.json.JSONObject;
 /**
  * 重要KPI指标
  */
-public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, Response.Listener<JSONObject>, Response.ErrorListener {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView tv_ScanCountToday;    //当日扫码件数
@@ -64,25 +63,26 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kpi);
-        initToolBar();
-        //获取RequestQueue对象
+    public void initData() {
         queue = Volley.newRequestQueue(this);
-        //设置swipeRefresh下拉图标颜色
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        initView();
-
         if (NetUtils.isNetworkConnected(this)) {
             refresh();
         }
     }
 
-    protected void initToolBar() {
+
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_kpi;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("KPI指数");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,7 +90,14 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     //初始化控件
-    protected void initView() {
+    @Override
+    public void initView() {
+        //设置swipeRefresh下拉图标颜色
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         tv_ScanCountToday = (TextView) findViewById(R.id.tv_kpi_ScanCountToday);
         tv_ScanCountTodayMom = (TextView) findViewById(R.id.tv_kpi_ScanCountTodayMom);
         tv_ScanCountWeekName = (TextView) findViewById(R.id.tv_kpi_ScanCountWeekName);
@@ -119,6 +126,7 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
 
     }
 
+
     @Override
     public void onRefresh() {
         if (NetUtils.isNetworkConnected(this)) {
@@ -128,28 +136,30 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
 
     //请求KPI数据
     private void RequestKpiIndex() {
-        final JsonRequest jsonRequest = new JsonRequest(UrlUtils.KpiIndex_url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                mKpiIndex = new Gson().fromJson(jsonObject.toString(), KpiIndex.class);
-                if (mKpiIndex.isSuccess()) {
-                    UpdateKpiIndexValue();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                ToastUtils.show(KpiIndexActivity.this);
-            }
-        });
+        final JsonRequest jsonRequest = new JsonRequest(UrlUtils.KpiIndex_url, null, this, this);
         //添加到请求队列中
         queue.add(jsonRequest);
 
     }
 
+    @Override
+    public void onResponse(JSONObject jsonObject) {
+        mKpiIndex = new Gson().fromJson(jsonObject.toString(), KpiIndex.class);
+        if (mKpiIndex.isSuccess()) {
+            UpdateKpiIndexValue();
+        }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+        ToastUtils.showMessage(this, "服务器似乎出了点问题!");
+    }
+
+    KpiIndex.DataEntity mDataEntity;
+
     //更新Kpi指数数据
     private void UpdateKpiIndexValue() {
-        KpiIndex.DataEntity mDataEntity = mKpiIndex.getData();
+        mDataEntity = mKpiIndex.getData();
         if (mDataEntity != null) {
             closeRefresh();
             KpiIndex.DataEntity.DataListEntity dataListEntity = mDataEntity.getDataList();
@@ -181,8 +191,6 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
         } else {
             ToastUtils.show(this);
         }
-
-
     }
 
     private void refresh() {
@@ -196,12 +204,6 @@ public class KpiIndexActivity extends BaseActivity implements SwipeRefreshLayout
     }
 
     private void closeRefresh() {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-                RequestKpiIndex();
-            }
-        });
+        swipeRefreshLayout.setRefreshing(false);
     }
 }

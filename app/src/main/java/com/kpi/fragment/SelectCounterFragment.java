@@ -1,12 +1,9 @@
 package com.kpi.fragment;
 
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
@@ -20,67 +17,92 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
+import com.kpi.baiduMap.PoiOverlay;
 import com.kpi.utils.DialogUtils;
 import com.kpi.utils.NetUtils;
 import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
 
 /**
- * 门店查询
+ * 门店查询 ————》使用百度地图SDK
  */
-public class SelectCounterFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, SearchView.OnQueryTextListener {
+public class SelectCounterFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener,
+        View.OnClickListener, SearchView.OnQueryTextListener, OnGetPoiSearchResultListener,
+        OnGetSuggestionResultListener, BDLocationListener, SearchView.OnCloseListener {
     private TextureMapView mMapView;
     private LocationClient mLocClient;
     private BaiduMap mBaiduMap;
-    public MyLocationListener myListener;
     private boolean isFirst = false;
     private SearchView searchView;
+    private RadioGroup rg;
+    private ImageView img_location;
+    private PoiSearch mPoiSearch;
+    private SuggestionSearch mSuggestionSearch;
+    private int pageNum = 1;
+    private int totalPageNum;
+    private Button btn_poi_next;
+    private Button btn_poi_pre;
 
     public SelectCounterFragment() {
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_select_counter, container, false);
-        initView(view);
-        return view;
+    public int getLayoutID() {
+        return R.layout.fragment_select_counter;
     }
 
-    private void initView(View view) {
-        //获取地图控件引用
-        mMapView = (TextureMapView) view.findViewById(R.id.bmapView);
-        RadioGroup rg = (RadioGroup) view.findViewById(R.id.rg);
-        ImageView img_location = (ImageView) view.findViewById(R.id.img_location);
-        searchView = (SearchView) view.findViewById(R.id.select_SearchView);
-        searchView.setOnQueryTextListener(this);
-        searchView.setSubmitButtonEnabled(true);//是否显示确认搜索按钮
-        searchView.setIconified(false);//设置搜索框默认展开
-        searchView.onActionViewExpanded();//表示在内容为空时不显示取消的x按钮，内容不为空时显示.
+    @Override
+    public void initListener() {
         img_location.setOnClickListener(this);
         rg.setOnCheckedChangeListener(this);
-    }
+        mSuggestionSearch.setOnGetSuggestionResultListener(this);
+        mPoiSearch.setOnGetPoiSearchResultListener(this);
+        btn_poi_next.setOnClickListener(this);
+        btn_poi_pre.setOnClickListener(this);
+        searchView.setOnCloseListener(this);
 
 
-    @Override
-    public void onDestroy() {
-        // 退出时销毁定位
-        if (mLocClient != null) {
-            mLocClient.stop();
-            // 关闭定位图层
-            mBaiduMap.setMyLocationEnabled(false);
-            mMapView.onDestroy();
-            mMapView = null;
-            super.onDestroy();
-        } else {
-            super.onDestroy();
-        }
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void initData() {
+        //获取地图控件引用
+        mMapView = findView(R.id.bmapView);
+        //创建POI检索实例
+        mPoiSearch = PoiSearch.newInstance();
+        mSuggestionSearch = SuggestionSearch.newInstance();
+    }
+
+    @Override
+    public void initView() {
+        rg = findView(R.id.rg);
+        img_location = findView(R.id.img_location);
+        searchView = findView(R.id.select_SearchView);
+        btn_poi_next = findView(R.id.btn_poi_next);
+        btn_poi_pre = findView(R.id.btn_poi_pre);
+        searchView.setOnQueryTextListener(this);
+        //   searchView.setIconified(false);//设置搜索框默认展开
+        //  searchView.onActionViewExpanded();//表示在内容为空时不显示取消的x按钮，内容不为空时显示.
+        searchView.setSubmitButtonEnabled(true);//是否显示确认搜索按钮
+
+
+    }
+
+    @Override
+    public void initToolBar() {
     }
 
     private void showProgressDialog() {
@@ -91,20 +113,22 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser && NetUtils.isNetworkConnected(getActivity())) {
             getMyLocation();
+
         }
+        super.setUserVisibleHint(isVisibleToUser);
+
     }
 
     //获取实时位置
     private void getMyLocation() {
         isFirst = true;
         showProgressDialog();
-        myListener = new MyLocationListener();
         mBaiduMap = mMapView.getMap();
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
         mLocClient = new LocationClient(getActivity());
-        mLocClient.registerLocationListener(myListener);
+        mLocClient.registerLocationListener(this);
         LocationClientOption option = new LocationClientOption();
         option.setOpenGps(true); // 打开gps
         option.setCoorType("bd09ll"); // 设置坐标类型
@@ -118,7 +142,19 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
 
     @Override
     public void onClick(View v) {
-        getMyLocation();
+        switch (v.getId()) {
+            case R.id.img_location:
+                getMyLocation();
+                break;
+            case R.id.btn_poi_next:
+                setPoiValue(++pageNum);
+                break;
+            case R.id.btn_poi_pre:
+                if (pageNum > 1) {
+                    setPoiValue(--pageNum);
+                }
+                break;
+        }
     }
 
     @Override
@@ -137,7 +173,19 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        setPoiValue(pageNum);
         return false;
+    }
+
+    private void setPoiValue(int num) {
+        DialogUtils.showProgressDialog(getActivity(), "正在检索...");
+        //发起检索请求
+        mPoiSearch.searchInCity((new PoiCitySearchOption())
+                .city("上海")
+                .keyword("静安区北京西路")   //具体定位到那个地方检索
+                .pageNum(num));
+        mSuggestionSearch.requestSuggestion((new SuggestionSearchOption())    //建议检索
+                .keyword("餐厅").city("上海"));
     }
 
     @Override
@@ -146,27 +194,105 @@ public class SelectCounterFragment extends Fragment implements RadioGroup.OnChec
         return true;
     }
 
-    public class MyLocationListener implements BDLocationListener {
+    @Override
+    public void onDestroy() {
+        // 退出时销毁定位
+        if (mLocClient != null) {
+            mLocClient.stop();
+            // 关闭定位图层
+            mBaiduMap.setMyLocationEnabled(false);
+            mMapView.onDestroy();
+            mMapView = null;
+        }
+        if (mPoiSearch != null) {
+            mPoiSearch.destroy();
+        }
+        if (mSuggestionSearch != null) {
+            mSuggestionSearch.destroy();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onGetPoiResult(PoiResult result) {
+        if (result == null
+                || result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+            ToastUtils.showMessage(getActivity(), "未找到结果");
+            return;
+        }
+        if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+            mBaiduMap.clear();
+            PoiOverlay overlay = new MyPoiOverlay(mBaiduMap);  //标记
+            mBaiduMap.setOnMarkerClickListener(overlay);
+            overlay.setData(result);
+            overlay.addToMap();
+            overlay.zoomToSpan();
+            this.totalPageNum = result.getTotalPageNum();
+            btn_poi_pre.setVisibility(View.VISIBLE);
+            btn_poi_next.setVisibility(View.VISIBLE);
+            return;
+        }
+        DialogUtils.dissmissProgressDialog();
+    }
+
+    @Override
+    public void onGetPoiDetailResult(PoiDetailResult result) {
+        if (result.error != SearchResult.ERRORNO.NO_ERROR) {
+            ToastUtils.showMessage(getActivity(), "抱歉，未找到结果");
+        } else {
+            ToastUtils.showMessage(getActivity(), result.getName() + ": " + result.getAddress());
+        }
+    }
+
+    @Override
+    public void onGetSuggestionResult(SuggestionResult res) {
+        if (res == null || res.getAllSuggestions() == null) {
+            return;
+        }
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        if (bdLocation != null && isFirst) {
+            ToastUtils.showMessage(getActivity(), "你当前的区域:" + bdLocation.getCity() + bdLocation.getDistrict());
+            MyLocationData locData = new MyLocationData.Builder()
+                    .accuracy(bdLocation.getRadius())
+                    // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(100).latitude(bdLocation.getLatitude())
+                    .longitude(bdLocation.getLongitude()).build();
+            mBaiduMap.setMyLocationData(locData);
+            LatLng ll = new LatLng(bdLocation.getLatitude(),
+                    bdLocation.getLongitude());
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(ll).zoom(18.0f);
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+            isFirst = false;
+        } else if (bdLocation.getCity() == null || bdLocation == null) {
+            ToastUtils.showMessage(getActivity(), "定位失败,请你重新定位！");
+        }
+        DialogUtils.dissmissProgressDialog();
+    }
+
+    @Override
+    public boolean onClose() {
+        btn_poi_next.setVisibility(View.GONE);
+        btn_poi_pre.setVisibility(View.GONE);
+        return false;
+    }
+
+
+    private class MyPoiOverlay extends PoiOverlay {
+        public MyPoiOverlay(BaiduMap baiduMap) {
+            super(baiduMap);
+        }
+
         @Override
-        public void onReceiveLocation(BDLocation bdLocation) {
-            if (bdLocation != null && isFirst) {
-                ToastUtils.showMessage(getActivity(), "你当前的区域:" + bdLocation.getCity() + bdLocation.getDistrict());
-                MyLocationData locData = new MyLocationData.Builder()
-                        .accuracy(bdLocation.getRadius())
-                        // 此处设置开发者获取到的方向信息，顺时针0-360
-                        .direction(100).latitude(bdLocation.getLatitude())
-                        .longitude(bdLocation.getLongitude()).build();
-                mBaiduMap.setMyLocationData(locData);
-                LatLng ll = new LatLng(bdLocation.getLatitude(),
-                        bdLocation.getLongitude());
-                MapStatus.Builder builder = new MapStatus.Builder();
-                builder.target(ll).zoom(18.0f);
-                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                isFirst = false;
-            } else if (bdLocation == null) {
-                ToastUtils.showMessage(getActivity(), "定位失败,默认为北京！");
-            }
-            DialogUtils.dissmissProgressDialog();
+        public boolean onPoiClick(int index) {
+            super.onPoiClick(index);
+            PoiInfo poi = getPoiResult().getAllPoi().get(index);
+            mPoiSearch.searchPoiDetail((new PoiDetailSearchOption())
+                    .poiUid(poi.uid));
+            return true;
         }
     }
 }

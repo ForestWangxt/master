@@ -51,10 +51,30 @@ public class DateUtil {
             //获取秒数作比较
             long l1 = date1.getTime() / 1000;
             long l2 = date2.getTime() / 1000;
-            if (l2 - l1 > 0) {
+            if (l2 - l1 >= 0) {
                 return true;
             } else {
                 return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //检查结束日期是否日期小于当天的日期
+    public static boolean checkStopTime(String stopTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            //转化为时间
+            Date date2 = sdf.parse(stopTime);
+            //获取秒数作比较
+            long l1 = new Date().getTime() / 1000;
+            long l2 = date2.getTime() / 1000;
+            if (l2 - l1 >= 0) {
+                return false;
+            } else {
+                return true;
             }
         } catch (ParseException e) {
             e.printStackTrace();

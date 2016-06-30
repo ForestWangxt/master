@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -52,18 +51,6 @@ public class StormAboutActivity extends BaseActivity {
     getResources().getString(R.string.cidong_about_01)};*/
     RequestManager manager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storm_about);
-        initToolBar();
-        DialogUtils.showProgressDialog(this, "正在加载...");
-        ListView listView = (ListView) findViewById(R.id.image_list);
-        MyBaseAdapter myBaseAdapter = new MyBaseAdapter();
-        listView.setAdapter(myBaseAdapter);
-        manager = Glide.with(this);
-
-    }
 
     class MyBaseAdapter extends BaseAdapter {
 
@@ -112,7 +99,32 @@ public class StormAboutActivity extends BaseActivity {
         }
     }
 
-    protected void initToolBar() {
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_storm_about;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+        DialogUtils.showProgressDialog(this, "正在加载...");
+        ListView listView = (ListView) findViewById(R.id.image_list);
+        MyBaseAdapter myBaseAdapter = new MyBaseAdapter();
+        listView.setAdapter(myBaseAdapter);
+        manager = Glide.with(this);
+    }
+
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("伺动简介");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

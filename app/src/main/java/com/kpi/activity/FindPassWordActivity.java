@@ -1,7 +1,6 @@
 package com.kpi.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -10,22 +9,34 @@ import com.kpi.utils.CountDownTimer;
 import com.kpi.utils.code;
 import com.storm.kpi.R;
 
-public class FindCodeActivity extends BaseActivity implements View.OnClickListener {
+/**
+ * 找回密码
+ */
+public class FindPassWordActivity extends BaseActivity implements View.OnClickListener {
     private Button btn_code;
     private Button btn_find_next;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_code);
-        code.a = 2;
-        initToolBar();
-        initView();
 
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_find_code;
     }
 
-    //初始化头部的ToolBar
-    protected void initToolBar() {
+    @Override
+    public void initView() {
+        btn_code = (Button) findViewById(R.id.btn_find_code);
+        btn_find_next = (Button) findViewById(R.id.btn_find_next);
+    }
+
+
+    @Override
+    public void initListener() {
+        btn_code.setOnClickListener(this);
+        btn_find_next.setOnClickListener(this);
+    }
+
+    @Override
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.code_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -35,12 +46,9 @@ public class FindCodeActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
-    protected void initView() {
-        btn_code = (Button) findViewById(R.id.btn_find_code);
-        btn_find_next = (Button) findViewById(R.id.btn_find_next);
-
-        btn_code.setOnClickListener(this);
-        btn_find_next.setOnClickListener(this);
+    @Override
+    public void initData() {
+        code.a = 2;
     }
 
     @Override
@@ -55,7 +63,6 @@ public class FindCodeActivity extends BaseActivity implements View.OnClickListen
                 startActivity(intent);
                 this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
-
         }
     }
 

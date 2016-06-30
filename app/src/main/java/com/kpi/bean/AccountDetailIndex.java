@@ -2,13 +2,8 @@ package com.kpi.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/3/30.
- */
+
 public class AccountDetailIndex {
-
-
-
 
     private DataEntity data;
 

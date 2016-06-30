@@ -1,7 +1,6 @@
 package com.kpi.activity;
 
 import android.app.DatePickerDialog;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -22,7 +21,6 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.kpi.adapter.ProductListViewAdapter;
-import com.kpi.bean.Product;
 import com.kpi.bean.ProductIndex;
 import com.kpi.utils.DateUtil;
 import com.kpi.utils.DialogUtils;
@@ -42,10 +40,9 @@ import java.util.List;
 /**
  * 产品表现
  */
-public class ProductPerformanceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class ProductPerformanceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, CompoundButton.OnCheckedChangeListener, View.OnClickListener, Response.ErrorListener, Response.Listener<JSONObject> {
     private ListView mListView;
     private RequestQueue queue;
-    private ProductIndex product;
     private LinearLayout mLinearLayout;
     private TextView tv_product_startTime;
     private TextView tv_product_stopTime;
@@ -53,21 +50,11 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
     private TextView tv_product_stopTimeMom;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_performance);
-        queue = Volley.newRequestQueue(this);
-        initView();
-        initToolBar();
-        UrlUtils.product = "";
-        UrlUtils.area = "";
-        if (NetUtils.isNetworkConnected(this)) {
-            showProgressDialog();
-            RequestProductData();
-        }
+    public int getLayoutID() {
+        return R.layout.activity_product_performance;
     }
-
-    protected void initView() {
+    @Override
+    public void initView() {
         mListView = (ListView) findViewById(R.id.Product_ListView);
         mLinearLayout = (LinearLayout) findViewById(R.id.show_hide_product_layout);
         RadioButton rb_product_select = (RadioButton) findViewById(R.id.rb_product_select);
@@ -121,7 +108,6 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
         }
@@ -136,19 +122,35 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
         }
     }
 
-    protected void initToolBar() {
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+        queue = Volley.newRequestQueue(this);
+        UrlUtils.product = "";
+        UrlUtils.area = "";
+        showProgressDialog();
+        if (NetUtils.isNetworkConnected(this)) {
+            RequestProductData();
+        }
+    }
+
+
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("产品表现");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
 
     //设置成为当期日期
     private void setCurrentTime() {
@@ -156,49 +158,46 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
         tv_product_stopTime.setText(DateUtil.CurrentDay());
         tv_product_startTimeMom.setText(DateUtil.CurrentDay());
         tv_product_stopTimeMom.setText(DateUtil.CurrentDay());
-
     }
 
     private void RequestProductData() {
-        JsonRequest request = new JsonRequest(new UrlUtils().Product_Url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                product = new Gson().fromJson(jsonObject.toString(), ProductIndex.class);
-                if (product.isSuccess()) {
-                    updateProduct();
-                    DialogUtils.dissmissProgressDialog();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                ToastUtils.show(ProductPerformanceActivity.this);
-            }
-        });
+        JsonRequest request = new JsonRequest(new UrlUtils().Product_Url, null, this, this);
         queue.add(request);
     }
 
-    private void updateProduct() {
-        Product p;
-        ArrayList<Product> products = new ArrayList<>();
-        ProductIndex.DataEntity dataEntity = product.getData();
-        if (dataEntity != null) {
+    @Override
+    public void onResponse(JSONObject jsonObject) {
+        ProductIndex.DataEntity product = new Gson().fromJson(jsonObject.toString(), ProductIndex.class).getData();
+        if (product != null) {
+            updateProduct(product);
+        }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+    }
+
+
+    private void updateProduct(ProductIndex.DataEntity product) {
+        ProductIndex.DataEntity.DataListTotilEntity p;
+        ArrayList<ProductIndex.DataEntity.DataListTotilEntity> products = new ArrayList<>();
+        if (product != null) {
             String url = "http://192.168.0.19:4444";
-            String ImgUrl = dataEntity.getImageurl();
             ImageView img_productIndex = (ImageView) findViewById(R.id.img_productIndex);
-            Glide.with(getApplicationContext()).load(url + new StringBuffer(ImgUrl)).into(img_productIndex);
-            List<ProductIndex.DataEntity.DataListTotilEntity> lists = dataEntity.getDataListTotil();
+            Glide.with(this).load(url + new StringBuffer(product.getImageurl())).into(img_productIndex);
+            List<ProductIndex.DataEntity.DataListTotilEntity> lists = product.getDataListTotil();
             for (int i = 0, count = lists.size(); i < count; i++) {
-                p = new Product();
+                p = new ProductIndex.DataEntity.DataListTotilEntity();
                 p.setProductName(lists.get(i).getProductName());
-                p.setProductCount(lists.get(i).getScanCount() + "");
-                p.setProductMom(lists.get(i).getScanCountMom());
-                p.setProductCustomer(lists.get(i).getScanCustomerCount() + "");
-                p.setProductCustomerMom(lists.get(i).getScanCustomerCountMom());
+                p.setScanCount(lists.get(i).getScanCount());
+                p.setScanCountMom(lists.get(i).getScanCountMom());
+                p.setScanCustomerCount(lists.get(i).getScanCustomerCount());
+                p.setScanCustomerCountMom(lists.get(i).getScanCustomerCountMom());
                 products.add(p);
             }
             ProductListViewAdapter pa = new ProductListViewAdapter(products, ProductPerformanceActivity.this);
             mListView.setAdapter(pa);
+            DialogUtils.dissmissProgressDialog();
         } else {
             ToastUtils.show(this);
         }
@@ -242,7 +241,6 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
             mLinearLayout.setVisibility(View.GONE);
         }
     }
-
 
     @Override
     public void onClick(View v) {
@@ -310,4 +308,6 @@ public class ProductPerformanceActivity extends BaseActivity implements RadioGro
     private void showProgressDialog() {
         DialogUtils.showProgressDialog(this, "数据加载中...");
     }
+
+
 }

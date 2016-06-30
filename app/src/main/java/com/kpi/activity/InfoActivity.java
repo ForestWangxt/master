@@ -2,7 +2,6 @@ package com.kpi.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,15 +22,22 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
     private TextView sex;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info);
-        initToolBar();
-        initView();
+    public int getLayoutID() {
+        return R.layout.activity_info;
+    }
+
+    @Override
+    public void initListener() {
 
     }
 
-    protected void initToolBar() {
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.info_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -41,7 +47,8 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    protected void initView() {
+    @Override
+    public void initView() {
         RelativeLayout update_logo = (RelativeLayout) findViewById(R.id.update_logo);   ///更新头像
         RelativeLayout update_username = (RelativeLayout) findViewById(R.id.update_username);  //更新姓名
         RelativeLayout update_sex = (RelativeLayout) findViewById(R.id.update_sex); //更新性别
@@ -62,6 +69,7 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
         update_job.setOnClickListener(this);
         update_note.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
@@ -89,6 +97,7 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
+
     Intent intent;
 
     private void startUpdateActivity(String updateMessage, String UpdateHintMessage) {
@@ -99,6 +108,7 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
         this.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 
+    //性别单选对话框
     private void showSexDialog() {
         final String[] items = {"男", "女"};
         new AlertDialog.Builder(this).setTitle("").setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
@@ -114,6 +124,8 @@ public class InfoActivity extends BaseActivity implements View.OnClickListener {
         }).create().show();
     }
 
+
+    //处理Activity返回结果
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

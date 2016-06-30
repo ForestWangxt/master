@@ -3,7 +3,10 @@ package com.kpi.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +18,7 @@ import com.storm.kpi.R;
 /**
  * 基类PassWordActivity  -->用于注册用户（设置密码）、找回密码、更新密码
  */
-public abstract class BasePassWordActivity extends BaseActivity implements View.OnClickListener {
+public abstract class BasePassWordActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText ed_password1;
     private EditText ed_password2;
     private TextInputLayout textInputLayout1;
@@ -32,7 +35,6 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
     //获取布局Id
     protected abstract int getLayoutId();
 
-
     private void initTooBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.password_toolbar);
         setSupportActionBar(toolbar);
@@ -43,7 +45,7 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
         }
     }
 
-    protected void initView() {
+    private void initView() {
         textInputLayout1 = (TextInputLayout) findViewById(R.id.password_TextInputLayout1);
         textInputLayout2 = (TextInputLayout) findViewById(R.id.password_TextInputLayout2);
         ed_password1 = (EditText) findViewById(R.id.ed_reg_password1);
@@ -51,7 +53,6 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
         Button btn_reg_finish = (Button) findViewById(R.id.btn_finish);
         btn_reg_finish.setOnClickListener(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -84,5 +85,25 @@ public abstract class BasePassWordActivity extends BaseActivity implements View.
             return false;
         }
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            this.overridePendingTransition(0, R.anim.fade_out);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_BACK) {
+            this.finish();
+            this.overridePendingTransition(0, R.anim.fade_out);
+            return true;
+        }
+        return false;
     }
 }

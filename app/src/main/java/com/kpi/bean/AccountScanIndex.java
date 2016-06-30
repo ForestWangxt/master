@@ -2,13 +2,7 @@ package com.kpi.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/3/30.
- */
 public class AccountScanIndex {
-
-
-
 
     private DataEntity data;
 
@@ -32,21 +26,6 @@ public class AccountScanIndex {
 
     public static class DataEntity {
         private String msg;
-        /**
-         * condition : null
-         * count : 190
-         * countMom : 29
-         * customerId : 统一阿萨姆[原味奶茶](PET500*15)
-         * database : null
-         * ddate : null
-         * ddatefrom : null
-         * ddatefromMom : null
-         * ddateto : null
-         * ddatetoMom : null
-         * order : null
-         * pageCount : null
-         * pageStart : null
-         */
 
         private List<DetailListEntity> detailList;
 

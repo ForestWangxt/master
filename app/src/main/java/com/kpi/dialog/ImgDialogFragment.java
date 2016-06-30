@@ -20,12 +20,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+/**
+ * 头像选取Dialog
+ */
 public class ImgDialogFragment extends DialogFragment implements View.OnClickListener {
     private CircleImageView logo;
 
     public ImgDialogFragment() {
-
 
     }
 

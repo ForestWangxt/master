@@ -29,33 +29,62 @@
             android:textColor="#fff"
             android:textSize="20sp" />
 
-
+        <android.support.v7.widget.SearchView
+            android:id="@+id/select_SearchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            app:queryHint="请输入门店..."
+            app:searchIcon="@mipmap/search" />
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/select_SearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/selectCounter_toolbar"
-        android:imeOptions="actionSearch"
-        app:queryHint="请输入门店..." />
 
     <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/select_SearchView"
+        android:layout_below="@+id/selectCounter_toolbar"
         android:clickable="true" />
+
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_poi_next"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/selectCounter_toolbar"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_btn"
+        android:text="下一组数据"
+        android:textColor="#fff"
+        android:textSize="12sp" />
+
+    <Button
+        android:visibility="gone"
+
+        android:id="@+id/btn_poi_pre"
+        android:layout_width="72dp"
+        android:layout_height="36dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/selectCounter_toolbar"
+        android:layout_marginRight="96dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_btn"
+        android:text="上一组数据"
+        android:textColor="#fff"
+        android:textSize="12sp" />
 
     <RadioGroup
         android:id="@+id/rg"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/select_SearchView"
+        android:layout_below="@+id/btn_poi_next"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
 
         <RadioButton
             android:id="@+id/rb_map_normal"

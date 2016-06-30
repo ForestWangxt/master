@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,21 +15,29 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
     private EditText editText;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed_back);
-        initToolBar();
-        initView();
-
-    }
-
-    protected void initView() {
+    public void initView() {
         editText = (EditText) findViewById(R.id.ed_feedback);
         Button button = (Button) findViewById(R.id.btn_feedback);
         button.setOnClickListener(this);
     }
 
-    protected void initToolBar() {
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_feed_back;
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle("反馈");

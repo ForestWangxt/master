@@ -2,11 +2,11 @@ package com.kpi.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kpi.utils.AppManager;
 import com.storm.kpi.R;
 
 /**
@@ -14,27 +14,37 @@ import com.storm.kpi.R;
  */
 public class SetActivity extends BaseActivity implements View.OnClickListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set);
-        initToolBar();
-        initView();
-    }
 
     //初始化头部的ToolBar
-    protected void initToolBar() {
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("设置");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    protected void initView() {
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_set;
+    }
+
+    @Override
+    public void initView() {
         TextView tv_exit = (TextView) findViewById(R.id.tv_exit);
         TextView tv_update_password = (TextView) findViewById(R.id.tv_update_password);
         tv_exit.setOnClickListener(this);
         tv_update_password.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
 
     }
 
@@ -59,8 +69,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         startActivity(new Intent(SetActivity.this, LoginActivity.class));
-                        SetActivity.this.finish();
-                        MyApp.getInstance().exit();
+                        AppManager.getAppManager().finishAllActivity();
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override

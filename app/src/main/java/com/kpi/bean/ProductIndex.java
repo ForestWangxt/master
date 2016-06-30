@@ -2,11 +2,11 @@ package com.kpi.bean;
 
 import java.util.List;
 
-
 public class ProductIndex {
 
 
     private DataEntity data;
+
 
     private boolean success;
 
@@ -30,8 +30,6 @@ public class ProductIndex {
         private int code;
         private String imageurl;
         private String msg;
-
-
         private List<DataListTotilEntity> dataListTotil;
 
         public int getCode() {
@@ -68,6 +66,7 @@ public class ProductIndex {
 
         public static class DataListTotilEntity {
             private Object area;
+            private Object areaId;
             private Object database;
             private Object ddate;
             private Object ddatefrom;
@@ -92,6 +91,14 @@ public class ProductIndex {
 
             public void setArea(Object area) {
                 this.area = area;
+            }
+
+            public Object getAreaId() {
+                return areaId;
+            }
+
+            public void setAreaId(Object areaId) {
+                this.areaId = areaId;
             }
 
             public Object getDatabase() {

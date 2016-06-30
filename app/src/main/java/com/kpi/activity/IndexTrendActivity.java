@@ -3,7 +3,6 @@ package com.kpi.activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
@@ -32,6 +31,7 @@ import com.kpi.utils.JsonRequest;
 import com.kpi.utils.NetUtils;
 import com.kpi.utils.ToastUtils;
 import com.kpi.utils.UrlUtils;
+import com.kpi.view.MyMarkerView;
 import com.storm.kpi.R;
 
 import org.json.JSONObject;
@@ -43,7 +43,8 @@ import java.util.List;
 /**
  * KPI指标趋势
  */
-public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
+public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener,
+        AdapterView.OnItemSelectedListener, Response.ErrorListener, Response.Listener<JSONObject> {
     private RadioButton rb1;
     private RadioButton rb2;
     private RadioButton rb3;
@@ -62,20 +63,23 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
     private TextView tv_stop_time;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index_trend);
-        initToolBar();
-        initView();
+    public int getLayoutID() {
+        return R.layout.activity_index_trend;
+    }
+
+    @Override
+    public void initData() {
         UrlUtils.qSearchType = "1";
         queue = Volley.newRequestQueue(this);
         showProgressDialog();
         if (NetUtils.isNetworkConnected(this)) {
             RequestChartValue();
         }
+
     }
 
-    protected void initToolBar() {
+    @Override
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("指标趋势图");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,14 +95,16 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
     }
 
     //初始化控件
-    protected void initView() {
+    @Override
+    public void initView() {
         mLineChart = (LineChart) findViewById(R.id.lineChart);
         XAxis xAxis = mLineChart.getXAxis();
         //设置X轴的文字在底部
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //设置描述文字
         mLineChart.setDescription("");
-
+        MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
+        mLineChart.setMarkerView(mv);
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.rg_IndexTrend);
         layout_date = (LinearLayout) findViewById(R.id.layout_date);
         rb1 = (RadioButton) findViewById(R.id.rb_trend_today);
@@ -120,57 +126,59 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
         setCurrentTime(tv_stop_time);
         setCurrentTime(sp_trend_date);
         radioGroup.setOnCheckedChangeListener(this);
-        if (sp_type != null) {
-            sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    UrlUtils.searchType = String.valueOf(position);
-                }
+        sp_time.setOnItemSelectedListener(this);
+        sp_type.setOnItemSelectedListener(this);
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+    }
 
+    @Override
+    public void initListener() {
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.sp_trend_type:
+                UrlUtils.qSearchType = String.valueOf(position + 1);   //日图
+                if (position == 0) {
+                    layout_date.setVisibility(View.GONE);
+                } else {
+                    layout_date.setVisibility(View.VISIBLE);
+                    hideTime();
                 }
-            });
+                break;
+            case R.id.sp_trend_time:
+                UrlUtils.imageType = String.valueOf(position + 1);  //小时图
+                if (position == 1) {
+                    setqSearchType();
+                }
+                break;
         }
-        if (sp_time != null) {
-            sp_time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    UrlUtils.imageType = String.valueOf(position + 1);
-                    if (position == 0) {
-                        layout_date.setVisibility(View.GONE);
-                    } else {
-                        layout_date.setVisibility(View.VISIBLE);
-                        hideTime();
-                    }
-                }
+    }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-        }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private void RequestChartValue() {
-        JsonRequest request = new JsonRequest(new UrlUtils().KpiTrend_url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject jsonObject) {
-                mKpiTrend = new Gson().fromJson(jsonObject.toString(), KpiTrend.class);
-                if (mKpiTrend.isSuccess()) {
-                    dialog.dismiss();
-                    UpdateChartValue();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-            }
-        });
+        JsonRequest request = new JsonRequest(new UrlUtils().KpiTrend_url, null, this, this);
         queue.add(request);
     }
+
+    @Override
+    public void onResponse(JSONObject jsonObject) {
+        mKpiTrend = new Gson().fromJson(jsonObject.toString(), KpiTrend.class);
+        if (mKpiTrend.isSuccess()) {
+            dialog.dismiss();
+            UpdateChartValue();
+        }
+    }
+    @Override
+    public void onErrorResponse(VolleyError volleyError) {
+
+    }
+
 
     private void UpdateChartValue() {
         KpiTrend.DataEntity dateEntity = mKpiTrend.getData();
@@ -191,14 +199,17 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
             addCount.add(new Entry(list.get(i).getAddCount(), i));
         }
         LineDataSet scanCountSet = new LineDataSet(scanCount, "扫码件数");
+        scanCountSet.setCircleRadius(5f);
         scanCountSet.setColor(Color.RED);
         scanCountSet.setHighLightColor(Color.RED);
 
         LineDataSet customerCountSet = new LineDataSet(customerCount, "扫码人数");
+        customerCountSet.setCircleRadius(5f);
         customerCountSet.setColor(Color.BLUE);
         customerCountSet.setHighLightColor(Color.BLUE);
 
         LineDataSet addCountSet = new LineDataSet(addCount, "注册人数");
+        addCountSet.setCircleRadius(5f);
         addCountSet.setColor(Color.GREEN);
         addCountSet.setHighLightColor(Color.GREEN);
 
@@ -226,7 +237,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_trend_today:
+            case R.id.rb_trend_today:           //10天
                 if (!UrlUtils.imageType.equals("2")) {
                     setqSearchType("1");
                 } else {
@@ -235,7 +246,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
                 rb1.setChecked(true);
                 hideTime();
                 break;
-            case R.id.rb_trend_week:
+            case R.id.rb_trend_week:          //周
                 if (!UrlUtils.imageType.equals("2")) {
                     setqSearchType("2");
                 } else {
@@ -244,7 +255,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
                 rb2.setChecked(true);
                 hideTime();
                 break;
-            case R.id.rb_trend_month:
+            case R.id.rb_trend_month:        //月
                 if (!UrlUtils.imageType.equals("2")) {
                     setqSearchType("3");
                 } else {
@@ -253,13 +264,13 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
                 rb3.setChecked(true);
                 hideTime();
                 break;
-            case R.id.rb_trend_option:
+            case R.id.rb_trend_option:    //自选
                 //ToastUtils.show(this, "请选择开始日和结束日");
                 UrlUtils.qSearchType = "4";
                 rb4.setChecked(true);
                 showTime();
                 break;
-            case R.id.rb_trend_detail:
+            case R.id.rb_trend_detail:        //详细
                 UrlUtils.pDate = sp_trend_date.getText().toString();
                 if (!UrlUtils.imageType.equals("2")) {
                     UrlUtils.qSearchType = "5";
@@ -297,7 +308,6 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
             case R.id.tv_trend_stop:
                 showDateDialog(v);
                 break;
-
         }
     }
 
@@ -314,7 +324,6 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-
             }
         });
         queue.add(request);
@@ -390,6 +399,7 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
                 break;
             case R.id.tv_trend_start:
                 tv_start_time.setText(DateUtil.CheckZero(year, month, day));
+                CheckCurrentTime(tv_start_time, tv_stop_time);
                 break;
             case R.id.tv_trend_stop:
                 tv_stop_time.setText(DateUtil.CheckZero(year, month, day));
@@ -400,14 +410,15 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
 
     //检查结束日应该晚于开始日
     private void CheckCurrentTime(TextView tv_startTime, TextView tv_stopTime) {
-        if (DateUtil.CheckCurrentTime(tv_startTime, tv_stopTime)) {
-            UrlUtils.pDateFrom = tv_startTime.getText().toString();
-            UrlUtils.pDateTo = tv_stopTime.getText().toString();
+        if (DateUtil.CheckCurrentTime(tv_startTime, tv_stopTime) && DateUtil.checkStopTime(tv_stopTime.getText().toString())) {
+            UrlUtils.pDateFrom = tv_startTime.getText().toString();   //开始日期
+            UrlUtils.pDateTo = tv_stopTime.getText().toString();   //结束日期
             UpdateChartValue();
         } else {
-            ToastUtils.showMessage(this, "结束日应该晚于开始日");
+            ToastUtils.showMessage(this, "你自选的时间有误！");
         }
     }
+
 
     //移除开始日和结束日
     private void hideTime() {
@@ -430,4 +441,6 @@ public class IndexTrendActivity extends BaseActivity implements RadioGroup.OnChe
     private void setCurrentTime(TextView v) {
         v.setText(DateUtil.CurrentDay());
     }
+
+
 }

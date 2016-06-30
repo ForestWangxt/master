@@ -2,9 +2,7 @@ package com.kpi.bean;
 
 import java.util.List;
 
-/**
- * Created by Administrator on 2016/3/24.
- */
+
 public class KpiTrendTime {
 
 
@@ -37,16 +35,7 @@ public class KpiTrendTime {
         private String searchType;
         private String msg;
         private String lstKpiUrl;
-        /**
-         * DDate : 20150323
-         * DHour : 0
-         * addCount : 0
-         * customerCount : 0
-         * database : null
-         * dateMd : null
-         * dateYmd : null
-         * scanCount : 0
-         */
+
 
         private List<DataListDetailEntity> dataListDetail;
 

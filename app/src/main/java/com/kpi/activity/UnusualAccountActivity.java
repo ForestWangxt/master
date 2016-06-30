@@ -2,7 +2,6 @@ package com.kpi.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -46,26 +45,23 @@ public class UnusualAccountActivity extends BaseActivity implements View.OnClick
     private ProgressBar pb_loading;
     private TextView tv_day_count;     //日扫码量
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_unusual_account);
-        queue = Volley.newRequestQueue(this);
-        accountLists = new ArrayList<>();
-        UrlUtils.page = 0;
-        initToolBar();
-        initView();
-    }
-
-
-    protected void initToolBar() {
+    public void initToolBar() {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("日扫码异常");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    protected void initView() {
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_unusual_account;
+    }
+
+    @Override
+    public void initView() {
         tv_account_date = (TextView) findViewById(R.id.tv_account_date);
         tv_account_date.setText(DateUtil.CurrentDay());
         mListView = (ListView) findViewById(R.id.list_account);
@@ -83,6 +79,18 @@ public class UnusualAccountActivity extends BaseActivity implements View.OnClick
         reduce.setOnClickListener(this);
         tv_loading.setVisibility(View.INVISIBLE);
         pb_loading.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void initData() {
+        queue = Volley.newRequestQueue(this);
+        accountLists = new ArrayList<>();
+        UrlUtils.page = 0;
     }
 
 

@@ -66,9 +66,6 @@
             android:name="com.kpi.activity.MyAccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kpi.activity.ContactsAnalystaActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.kpi.activity.StormAboutActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -82,7 +79,8 @@
         <activity
             android:name="com.kpi.activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -95,7 +93,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.kpi.activity.SetActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.kpi.activity.BeginHelpActivity"
             android:screenOrientation="portrait"
@@ -123,9 +121,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.kpi.activity.FindCodeActivity"
+            android:name="com.kpi.activity.FindPassWordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.BindAccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.kpi.activity.AccountManagerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.kpi.activity.AddAccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.kpi.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -13,22 +12,34 @@ import com.storm.kpi.R;
  */
 public class UpdateInfoActivity extends BaseActivity implements View.OnClickListener {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_info);
-        EditText ed_update = (EditText) findViewById(R.id.ed_update);
 
+    @Override
+    public int getLayoutID() {
+        return R.layout.activity_update_info;
+    }
+
+    @Override
+    public void initView() {
+        EditText ed_update = (EditText) findViewById(R.id.ed_update);
         ed_update.setText(getIntent().getStringExtra("update"));
         ed_update.setHint(getIntent().getStringExtra("updateHint"));
         ed_update.setSelection(getIntent().getStringExtra("update").length());
         TextView tv_save = (TextView) findViewById(R.id.tv_info_save);
         tv_save.setOnClickListener(this);
-        initToolBar();
+    }
+
+    @Override
+    public void initListener() {
 
     }
 
-    protected void initToolBar() {
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.update_ToolBar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {

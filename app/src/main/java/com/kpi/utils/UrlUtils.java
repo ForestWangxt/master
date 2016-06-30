@@ -29,6 +29,7 @@ public class UrlUtils {
 
     public String AreaPer_Url = "http://192.168.0.19:4444/report/searchKp0003Android.do?format=json&btn=1&DDatefrom=20160323&DDateto=20160323&DDatefromMom=20160322&DDatetoMom=20160322&type=1&order=SCAN_COUNT&limit=5";
     public String KpiTrend_url;
+    public String home_KpiTrend_url;     //首页显示如图的URL；
 
     public String Product_Url;
 
@@ -56,6 +57,8 @@ public class UrlUtils {
     public UrlUtils() {
         //KPI指数
         this.KpiTrend_url = "http://192.168.0.19:4444/report/searchAndroid.do?searchType=" + searchType + "&imageType=" + imageType + "&pDateFrom=" + pDateFrom + "&pDateTo=" + pDateTo + "&pDate=" + pDate + "&qSearchType=" + qSearchType + "&format=json";
+        this.home_KpiTrend_url = "http://192.168.0.19:4444/report/searchAndroid.do?searchType=" + searchType + "&imageType=2&pDateFrom=&pDateTo&pDate=" + DateUtil.CurrentDay() + "&qSearchType=1&format=json";
+
         //区域表现
         this.AreaPer_Url = "http://192.168.0.19:4444/report/searchKp0003Android.do?format=json&btn=" + btn + "&DDatefrom=" + DDatefrom + "&DDateto=" + DDateto + "&DDatefromMom=" + DDatefromMom + "&DDatetoMom=" + DDatetoMom + "&type=" + type + "&order=" + order + "&limit=5";
         //产品表现

@@ -4,13 +4,7 @@ import java.util.List;
 
 
 public class KpiTrend {
-
-
-
-
     private DataEntity data;
-
-
     private boolean success;
 
     public void setData(DataEntity data) {
@@ -37,17 +31,6 @@ public class KpiTrend {
         private String searchType;
         private String msg;
         private String lstKpiUrl;
-        /**
-         * DDate : 20160313
-         * DDatefrom : null
-         * DDateto : null
-         * addCount : 3270
-         * customerCount : 10441
-         * database : null
-         * dateMd : 03/13
-         * dateYmd : 2016/03/13
-         * scanCount : 23633
-         */
 
         private List<DataListDetailEntity> dataListDetail;
 
