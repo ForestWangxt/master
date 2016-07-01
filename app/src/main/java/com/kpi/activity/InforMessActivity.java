@@ -1,6 +1,7 @@
 package com.kpi.activity;
 
 
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import com.kpi.adapter.InforMessListView;
@@ -13,13 +14,18 @@ import java.util.ArrayList;
  */
 public class InforMessActivity extends BaseActivity {
     private ListView mListView;
-    private ArrayList<InforMess> list;
+    private ArrayList<InforMess> list = new ArrayList<InforMess>();
+
 
 
     @Override
     public int getLayoutID() {
         return R.layout.activity_informess;
     }
+
+
+
+
     @Override
     public void initView() {
         mListView = (ListView) findViewById(R.id.informess_list);
@@ -40,10 +46,13 @@ public class InforMessActivity extends BaseActivity {
         mInforMess3.setAbst("新浪科技讯，5月19日凌晨消息，谷歌公司(Google)今日在美国旧金山召开Google I/O 2016年度开发者大会。发布新的智能助手，智能家居产品等。我们难得在著名理工男谷歌的发布会上看到一次文艺开场，Google I/O这场发布会居然从一段5分钟live house音乐表演开始。然后陆续发布产品。");
         list.add(mInforMess3);
 
-        InforMessListView inforlist = new InforMessListView(this,list);
+        InforMessListView inforlist = new InforMessListView(this, list);
         mListView.setAdapter(inforlist);
-
     }
+
+
+
+
 
     @Override
     public void initListener() {
