@@ -223,11 +223,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void closeRefresh() {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+        swipeRefreshLayout.setRefreshing(false);
+
     }
 }
