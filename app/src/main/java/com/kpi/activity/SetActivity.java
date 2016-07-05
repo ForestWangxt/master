@@ -6,6 +6,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.kpi.utils.AppManager;
 import com.storm.kpi.R;
 
@@ -68,8 +70,26 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        startActivity(new Intent(SetActivity.this, LoginActivity.class));
-                        AppManager.getAppManager().finishAllActivity();
+                        EMClient.getInstance().logout(false, new EMCallBack() {
+
+                            @Override
+                            public void onSuccess() {
+                                finish();
+                                startActivity(new Intent(SetActivity.this, LoginActivity.class));
+                                AppManager.getAppManager().finishAllActivity();
+                            }
+
+                            @Override
+                            public void onProgress(int progress, String status) {
+
+                            }
+
+                            @Override
+                            public void onError(int code, String error) {
+
+                            }
+                        });
+
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override

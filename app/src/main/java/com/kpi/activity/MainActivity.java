@@ -1,10 +1,16 @@
 package com.kpi.activity;
 
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.ui.EaseContactListFragment;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.kpi.adapter.viewPagerAdapter;
 import com.kpi.fragment.HomeFragment;
 import com.kpi.fragment.MessageFragment;
@@ -12,6 +18,9 @@ import com.kpi.fragment.MyKPIFragment;
 import com.kpi.fragment.SelectCounterFragment;
 import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 主页面  ————》业务逻辑
@@ -23,6 +32,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private RadioButton radioButton3;
     private RadioButton radioButton4;
     private RadioButton radioButton5;
+    private EaseConversationListFragment conversationListFragment = new EaseConversationListFragment();
 
 
 //        //抽屉式布局
@@ -39,6 +49,13 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     @Override
     public void initData() {
         initFragment();
+        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
+
+            @Override
+            public void onListItemClicked(EMConversation conversation) {
+                startActivity(new Intent(MainActivity.this, ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName()));
+            }
+        });
     }
 
     @Override
@@ -75,8 +92,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private void initFragment() {
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new HomeFragment());  //主页面
-        adapter.AddFragment(new MessageFragment());   //消息
-        adapter.AddFragment(new SelectCounterFragment());   //门店
+     //   adapter.AddFragment(new MessageFragment());   //消息
+//        adapter.AddFragment(new EaseConversationListFragment());
+        adapter.AddFragment(conversationListFragment);
+     //   adapter.AddFragment(new SelectCounterFragment());   //工作中
+        adapter.AddFragment(new SelectCounterFragment());
         adapter.AddFragment(new MyKPIFragment());    //我的智码
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new onPageChange());
@@ -187,4 +207,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
         return false;
     }
+
+
 }

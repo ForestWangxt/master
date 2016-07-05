@@ -6,7 +6,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.kpi.utils.AppManager;
 import com.storm.kpi.R;
 
@@ -27,7 +30,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void initData() {
-
+        if(EMClient.getInstance().isLoggedInBefore()){
+            //登录过直接进入主页面
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -55,8 +62,31 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Intent intent;
         switch (v.getId()) {
             case R.id.btn_user_login:
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                //登录
+                EMClient.getInstance().login("aaa", "aaa", new EMCallBack() {
+
+                    @Override
+                    public void onSuccess() {
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+
+                    @Override
+                    public void onError(int code, String error) {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "登录失败", 0).show();
+                            }
+                        });
+                    }
+                });
+                /*intent = new Intent(this, MainActivity.class);
+                startActivity(intent);*/
                 AppManager.getAppManager().finishActivity(this);
                 break;
             case R.id.tv_user_reg:

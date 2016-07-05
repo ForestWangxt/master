@@ -23,15 +23,12 @@ android {
 dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':MPChartLib')
-    compile files('libs/baidumapapi_map_v3_7_0.jar')
-    compile files('libs/baidumapapi_base_v3_7_0.jar')
-    compile files('libs/baidumapapi_search_v3_7_0.jar')
-    compile files('libs/locSDK_6.13.jar')
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'com.google.code.gson:gson:2.4'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.bm.photoview:library:1.3.6'
+    compile project(':easeUI')
 }

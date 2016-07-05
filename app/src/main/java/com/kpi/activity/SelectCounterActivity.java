@@ -12,9 +12,11 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
@@ -42,7 +44,8 @@ import com.storm.kpi.R;
 public class SelectCounterActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener,
         View.OnClickListener, SearchView.OnQueryTextListener, OnGetPoiSearchResultListener,
         OnGetSuggestionResultListener, BDLocationListener, SearchView.OnCloseListener {
-    private TextureMapView mMapView;
+//    private TextureMapView mMapView;
+    private MapView mMapView;
     private LocationClient mLocClient;
     private BaiduMap mBaiduMap;
     private boolean isFirst = false;
@@ -90,6 +93,7 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
 
     @Override
     public void initView() {
+    //    SDKInitializer.initialize(this);
         rg = findView(R.id.rg);
         img_location = findView(R.id.img_location);
         searchView = findView(R.id.select_SearchView);
