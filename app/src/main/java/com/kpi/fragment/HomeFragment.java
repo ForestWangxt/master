@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.kpi.activity.AreaPerformanceActivity;
 import com.kpi.activity.IndexTrendActivity;
@@ -27,7 +26,7 @@ import org.json.JSONObject;
 /**
  * 动态智码Fragment
  */
-public class HomeFragment extends BaseFragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, Response.Listener<JSONObject>, Response.ErrorListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, Response.Listener<JSONObject> {
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tv_ScanCountToday;    //当日扫码件数
     private TextView tv_ScanCountTodayMom;
@@ -115,9 +114,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void initData() {
         UrlUtils.qSearchType = "1";
-        if (NetUtils.isNetworkConnected(getActivity())) {
-            refresh();
-        }
+        refresh();
+
     }
 
     @Override
@@ -151,17 +149,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void onRefresh() {
-        if (NetUtils.isNetworkConnected(getActivity())) {
-            RequestKpiIndex();
-        }
+        RequestKpiIndex();
     }
 
     //请求KPI数据
     private void RequestKpiIndex() {
-        JsonRequest jsonRequest = new JsonRequest(UrlUtils.KpiIndex_url, null, this, this);
-        //添加到请求队列中
-        queue.add(jsonRequest);
-
+        if (NetUtils.isNetworkConnected(getActivity())) {
+            JsonRequest jsonRequest = new JsonRequest(UrlUtils.KpiIndex_url, null, this, null);
+            //添加到请求队列中
+            queue.add(jsonRequest);
+        }
     }
 
     @Override
@@ -205,13 +202,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-
-    @Override
-    public void onErrorResponse(VolleyError volleyError) {
-        ToastUtils.showMessage(getActivity(), "服务器似乎出了点问题!");
-    }
-
-
     private void refresh() {
         swipeRefreshLayout.post(new Runnable() {
             @Override
@@ -224,6 +214,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     private void closeRefresh() {
         swipeRefreshLayout.setRefreshing(false);
-
     }
 }

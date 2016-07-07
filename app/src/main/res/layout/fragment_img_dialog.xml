@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
     android:orientation="vertical"
     tools:context="com.kpi.dialog.ImgDialogFragment">
 
@@ -11,7 +10,6 @@
         android:id="@+id/img_dialog_paizhao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_mykpi_item"
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:text="拍照"
@@ -26,7 +24,6 @@
         android:id="@+id/img_dialog_tuku"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_mykpi_item"
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:text="相册"
@@ -41,7 +38,6 @@
         android:id="@+id/img_dialog_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_mykpi_item"
         android:gravity="center_horizontal"
         android:padding="8dp"
         android:text="取消"

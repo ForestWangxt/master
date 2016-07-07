@@ -11,6 +11,7 @@ import com.kpi.activity.BindAccountActivity;
 import com.kpi.activity.InfoActivity;
 import com.kpi.activity.InforMessActivity;
 import com.kpi.activity.SetActivity;
+import com.kpi.dialog.UserKpiDialog;
 import com.storm.kpi.R;
 
 /**
@@ -31,12 +32,20 @@ public class MyKPIFragment extends BaseFragment implements View.OnClickListener 
         RelativeLayout beginhelp = findView(R.id.beginhelp);
         RelativeLayout infor_message = findView(R.id.infor_message);
         RelativeLayout infor_bindaccount = findView(R.id.infor_bindaccount);
+        RelativeLayout Layout_kpi_Set = findView(R.id.Layout_kpi_Set);
         Layout_info.setOnClickListener(this);
         Layout_about_Storm.setOnClickListener(this);
         Layout_Set.setOnClickListener(this);
         beginhelp.setOnClickListener(this);
         infor_message.setOnClickListener(this);
         infor_bindaccount.setOnClickListener(this);
+        Layout_kpi_Set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserKpiDialog dialog = new UserKpiDialog();
+                dialog.show(getFragmentManager(), "");
+            }
+        });
     }
 
     @Override
@@ -80,4 +89,5 @@ public class MyKPIFragment extends BaseFragment implements View.OnClickListener 
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
+
 }

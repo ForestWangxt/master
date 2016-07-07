@@ -1,12 +1,10 @@
 package com.kpi.activity;
 
-        import android.app.Application;
+import android.app.Application;
 
-        import com.baidu.mapapi.SDKInitializer;
-
+import com.baidu.mapapi.SDKInitializer;
 
 public class MyApp extends Application {
-
 
     @Override
     public void onCreate() {

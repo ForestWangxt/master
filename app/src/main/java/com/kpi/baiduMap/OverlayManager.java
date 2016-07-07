@@ -81,7 +81,6 @@ public abstract class OverlayManager implements OnMarkerClickListener, OnPolylin
         }
         mOverlayOptionList.clear();
         mOverlayList.clear();
-
     }
 
     /**

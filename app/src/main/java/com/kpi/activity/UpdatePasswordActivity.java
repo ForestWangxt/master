@@ -2,7 +2,7 @@ package com.kpi.activity;
 
 import com.storm.kpi.R;
 
-public abstract  class UpdatePasswordActivity extends BasePassWordActivity {
+public class UpdatePasswordActivity extends BasePassWordActivity {
 
     @Override
     protected int getLayoutId() {

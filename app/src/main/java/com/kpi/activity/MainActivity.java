@@ -9,7 +9,7 @@ import com.kpi.adapter.viewPagerAdapter;
 import com.kpi.fragment.HomeFragment;
 import com.kpi.fragment.MessageFragment;
 import com.kpi.fragment.MyKPIFragment;
-import com.kpi.fragment.SelectCounterFragment;
+import com.kpi.fragment.WorkingFragment;
 import com.kpi.utils.ToastUtils;
 import com.storm.kpi.R;
 
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         viewPagerAdapter adapter = new viewPagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new HomeFragment());  //主页面
         adapter.AddFragment(new MessageFragment());   //消息
-        adapter.AddFragment(new SelectCounterFragment());   //门店
+        adapter.AddFragment(new WorkingFragment());   //门店
         adapter.AddFragment(new MyKPIFragment());    //我的智码
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new onPageChange());

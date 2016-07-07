@@ -66,7 +66,7 @@
             android:name="com.kpi.activity.MyAccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.kpi.activity.StormAboutActivity"
+            android:name="com.kpi.activity.StormSummaryActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.kpi.activity.InfoActivity"
@@ -137,13 +137,19 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
-
         <activity
             android:name="com.kpi.activity.SelectCounterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name="com.kpi.activity.BusinessOpportunityActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.kpi.activity.ContactStormActivity" />
+        <activity
+            android:name="com.kpi.activity.SignInNotesActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.kpi.activity.SetScanKpiActivity"></activity>
     </application>
 
 </manifest>

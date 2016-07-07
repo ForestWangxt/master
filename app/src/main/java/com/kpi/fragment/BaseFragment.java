@@ -18,7 +18,7 @@ public abstract class BaseFragment extends Fragment implements UiOperation {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutID(), null);
-        queue = Volley.newRequestQueue(getActivity());
+        queue = getRequestQueue();
         initView();
         initData();
         initListener();
@@ -32,5 +32,12 @@ public abstract class BaseFragment extends Fragment implements UiOperation {
             return view;
         }
         return null;
+    }
+
+    private RequestQueue getRequestQueue() {
+        if (queue == null) {
+            queue = Volley.newRequestQueue(getActivity());
+        }
+        return queue;
     }
 }

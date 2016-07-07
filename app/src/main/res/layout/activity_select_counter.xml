@@ -48,7 +48,6 @@
 
 
     <Button
-        android:visibility="gone"
         android:id="@+id/btn_poi_next"
         android:layout_width="72dp"
         android:layout_height="36dp"
@@ -59,12 +58,12 @@
         android:background="@drawable/bg_btn"
         android:text="下一组数据"
         android:textColor="#fff"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone" />
 
     <Button
-        android:visibility="gone"
-
         android:id="@+id/btn_poi_pre"
+
         android:layout_width="72dp"
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
@@ -74,7 +73,8 @@
         android:background="@drawable/bg_btn"
         android:text="上一组数据"
         android:textColor="#fff"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:visibility="gone" />
 
     <RadioGroup
         android:id="@+id/rg"
@@ -102,5 +102,12 @@
             android:textColor="#ff0000" />
     </RadioGroup>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="12dp"
+        android:src="@mipmap/note" />
 </RelativeLayout>

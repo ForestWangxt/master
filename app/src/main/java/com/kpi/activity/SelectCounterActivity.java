@@ -1,6 +1,8 @@
 package com.kpi.activity;
 
 
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -55,6 +57,7 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
     private int totalPageNum;
     private Button btn_poi_next;
     private Button btn_poi_pre;
+    private FloatingActionButton fab;
 
     public SelectCounterActivity() {
     }
@@ -85,7 +88,6 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
         //创建POI检索实例
         mPoiSearch = PoiSearch.newInstance();
         mSuggestionSearch = SuggestionSearch.newInstance();
-
     }
 
     @Override
@@ -95,6 +97,8 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
         searchView = findView(R.id.select_SearchView);
         btn_poi_next = findView(R.id.btn_poi_next);
         btn_poi_pre = findView(R.id.btn_poi_pre);
+        fab = findView(R.id.fab_note);
+        fab.setOnClickListener(this);
         searchView.setOnQueryTextListener(this);
         //   searchView.setIconified(false);//设置搜索框默认展开
         //  searchView.onActionViewExpanded();//表示在内容为空时不显示取消的x按钮，内容不为空时显示.
@@ -118,13 +122,11 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
         DialogUtils.showProgressDialog(this, "正在定位...");
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
         if (NetUtils.isNetworkConnected(this)) {
             getMyLocation();
-
         }
     }
 
@@ -163,6 +165,9 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
                     setPoiValue(--pageNum);
                 }
                 break;
+            case R.id.fab_note:
+                startActivity(new Intent(this, SignInNotesActivity.class));
+                break;
         }
     }
 
@@ -199,7 +204,6 @@ public class SelectCounterActivity extends BaseActivity implements RadioGroup.On
 
     @Override
     public boolean onQueryTextChange(String newText) {
-
         return true;
     }
 

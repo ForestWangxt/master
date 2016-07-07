@@ -9,11 +9,10 @@
 
 
     <TextView
-
         android:id="@+id/tv_Storm_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_mykpi_item"
         android:padding="16dp"
         android:text="伺动简介"
@@ -24,11 +23,27 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#d9d8d8" />
+
+    <TextView
+        android:id="@+id/tv_about_Storm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_mykpi_item"
+        android:padding="16dp"
+        android:text="关于伺动"
+        android:textColor="#4e4e4e"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#d9d8d8" />
+
     <TextView
         android:id="@+id/tv_storm_TiaoKuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_mykpi_item"
         android:padding="16dp"
         android:text="使用条款"

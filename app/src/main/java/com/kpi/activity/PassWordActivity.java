@@ -16,7 +16,6 @@ public class PassWordActivity extends BasePassWordActivity {
         TextView tv = (TextView) findViewById(R.id.tv);
         if (getIntent().getStringExtra("title") != null) {
             tv.setText(getIntent().getStringExtra("title"));
-
         }
     }
 
